@@ -10,8 +10,9 @@ public class Room {
     private ArrayList<String> items;
 
     public Room(String description) {
-        this.description = description;
+
         exits = new HashMap<>();
+        items = new ArrayList<>();
     }
 
     public String getDescription() {
@@ -20,6 +21,10 @@ public class Room {
 
     public void setExit(String direction, Room neighbor) {
         exits.put(direction, neighbor);
+    }
+
+    public void removeExits(){
+        exits = new HashMap<>();
     }
 
     public Room getExit(String direction) {

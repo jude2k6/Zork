@@ -2,40 +2,27 @@
   "Outside": {
     "description": "outside the main entrance of the university",
     "items": [],
-    "exits": {
-      "east": "Theatre",
-      "south": "Lab",
-      "west": "Pub"
-    }
+    "exits": {}
   },
   "Theatre": {
     "description": "in a lecture theatre",
     "items": [],
-    "exits": {
-      "west": "Outside"
-    }
+    "exits": {}
   },
   "Pub": {
     "description": "in the campus pub",
     "items": [],
-    "exits": {
-      "east": "Outside"
-    }
+    "exits": {}
   },
   "Lab": {
     "description": "in a computing lab",
     "items": [],
-    "exits": {
-      "north": "Outside",
-      "east": "Office"
-    }
+    "exits": {}
   },
   "Office": {
     "description": "in the computing admin office",
     "items": [],
-    "exits": {
-      "west": "Lab"
-    }
+    "exits": {}
   },
   "Treasure_room": {
     "description": "dimly lit room",
