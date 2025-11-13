@@ -22,7 +22,7 @@ import java.util.Scanner;
 
 public class ZorkULGame {
     private Parser parser;
-    private Character player;
+    private static Character player;
     private static Map<String, Room> rooms;
 
     public ZorkULGame() {
@@ -34,7 +34,7 @@ public class ZorkULGame {
 
         // create the player character and start outside
 
-        player = new Character("player", rooms.get("Outside"));
+
     }
 
     public void play() {
@@ -76,7 +76,8 @@ public class ZorkULGame {
                     System.out.println("Quit what?");
                     return false;
                 } else {
-                     save.saveGame(rooms);
+
+                     save.saveGame(rooms,player);
 
 
                     return true; // signal to quit
@@ -118,14 +119,17 @@ public class ZorkULGame {
         String  choice = input.nextLine();
 
         if(choice.equals("load")){
-            System.out.println("Enter your sava folder path");
+            System.out.println("Enter your save folder path");
             String path = input.nextLine();
             rooms =  Loadmap.loadmap(path);
+            player = LoadCharacter.loadPlayer(path);
+            player.setCurrentRoom(rooms.get("Outside"));
         }
         else {
             rooms =  Loadmap.loadmap();
+            player = LoadCharacter.loadPlayer();
+            player.setCurrentRoom(rooms.get("Outside"));
         }
-
 
 
         ZorkULGame game = new ZorkULGame();

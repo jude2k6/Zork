@@ -1,8 +1,11 @@
 package org.zorkrip;
 
+import java.util.ArrayList;
+
 public class Character {
     private String name;
     private Room currentRoom;
+    private ArrayList<Item> inventory;
 
     public Character(String name, Room startingRoom) {
         this.name = name;

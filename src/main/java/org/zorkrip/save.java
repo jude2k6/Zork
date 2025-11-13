@@ -10,8 +10,7 @@ import java.util.Scanner;
 public class save {
 
 
-
-    public static void saveGame(Map<String, Room> rooms){
+    public static void saveGame(Map<String, Room> rooms,Character player) {
 
         Scanner input2 = new Scanner(System.in);
         System.out.println("Enter your save directory ");
@@ -24,20 +23,29 @@ public class save {
             }
         }
 
-        for(String key: rooms.keySet()){
+        for (String key : rooms.keySet()) {
             rooms.get(key).removeExits();
         }
         Gson gson = new Gson();
         String json = gson.toJson(rooms);
-        try (FileWriter writer = new FileWriter(path+"/map.json")){
+        try (FileWriter writer = new FileWriter(path + "/map.json")) {
 
 
             writer.write(json);
 
-            System.out.println(
-                    "Data written to the file successfully.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch (Exception e){
-            e.printStackTrace();        }
+        json = gson.toJson(player);
+        try (FileWriter writer = new FileWriter(path + "/player.json")) {
+
+
+            writer.write(json);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

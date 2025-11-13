@@ -13,6 +13,7 @@ public class Room {
 
         exits = new HashMap<>();
         items = new ArrayList<>();
+
     }
 
     public String getDescription() {
