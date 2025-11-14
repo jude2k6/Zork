@@ -14,9 +14,6 @@ Overall, it recreates the classic Zork interactive fiction experience with a uni
 emphasizing exploration and simple command-driven gameplay
 */
 
-import com.google.gson.Gson;
-
-import java.io.FileWriter;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -77,7 +74,7 @@ public class ZorkULGame {
                     return false;
                 } else {
 
-                     save.saveGame(rooms,player);
+                    save.saveGame(rooms, player);
 
 
                     return true; // signal to quit
@@ -116,18 +113,18 @@ public class ZorkULGame {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.println("Load");
-        String  choice = input.nextLine();
+        String choice = input.nextLine();
 
-        if(choice.equals("load")){
+        if (choice.equals("load")) {
             System.out.println("Enter your save folder path");
             String path = input.nextLine();
-            rooms =  Loadmap.loadmap(path);
+            rooms = Loadmap.loadmap(path);
             player = LoadCharacter.loadPlayer(path);
-            player.setCurrentRoom(rooms.get("Outside"));
-        }
-        else {
-            rooms =  Loadmap.loadmap();
-            player = LoadCharacter.loadPlayer();
+            System.out.println(player.getCurrentRoom());
+
+        } else {
+            rooms = Loadmap.loadmap();
+            player = new Character("Player", rooms.get("Outside"));
             player.setCurrentRoom(rooms.get("Outside"));
         }
 

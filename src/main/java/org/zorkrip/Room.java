@@ -1,10 +1,11 @@
 package org.zorkrip;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
 
-public class Room {
+public class Room  implements Serializable {
     private String description;
     private Map<String, Room> exits; // Map direction to neighboring Room
     private ArrayList<String> items;

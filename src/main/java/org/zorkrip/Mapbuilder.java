@@ -2,16 +2,15 @@ package org.zorkrip;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import java.io.FileReader;
-import java.io.Reader;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.Map;
 
 
-public class Loadmap {
+public class Mapbuilder {
 
     public static void main(String[] args) {
-        System.out.println(System.getProperty("user.dir"));
+
         try (Reader reader = new FileReader(System.getProperty("user.dir") + "/src/main/java/org/zorkrip/map.json")) {
             Gson gson = new Gson();
 
@@ -30,6 +29,7 @@ public class Loadmap {
             rooms.get("Lab").setExit("east", rooms.get("Office"));
 
             rooms.get("Office").setExit("west", rooms.get("Lab"));
+            Serialize.serialiseRoom(rooms);
         } catch (Exception e) {
             System.out.println("shits broken");
             e.printStackTrace(); // This shows the real error
@@ -71,6 +71,25 @@ public class Loadmap {
 
 
     }
+
+    public class Serialize {
+        public static void serialiseRoom(Map<String, Room> room) {
+
+
+            // Serialize the object to a file
+            try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("map.ser"))) {
+                out.writeObject(room);
+                System.out.println(" Serialised to map.ser");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+
+
+
     public static Map<String,Room> loadmap(String path) {
         try (Reader reader = new FileReader(path+"/map.json")) {
             Gson gson = new Gson();

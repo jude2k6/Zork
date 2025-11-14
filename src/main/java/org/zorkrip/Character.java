@@ -1,8 +1,9 @@
 package org.zorkrip;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Character {
+public class Character implements Serializable {
     private String name;
     private Room currentRoom;
     private ArrayList<Item> inventory;

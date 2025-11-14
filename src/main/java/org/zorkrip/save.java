@@ -1,9 +1,7 @@
 package org.zorkrip;
 
-import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -23,29 +21,19 @@ public class save {
             }
         }
 
-        for (String key : rooms.keySet()) {
-            rooms.get(key).removeExits();
-        }
-        Gson gson = new Gson();
-        String json = gson.toJson(rooms);
-        try (FileWriter writer = new FileWriter(path + "/map.json")) {
 
-
-            writer.write(json);
-
-
-        } catch (Exception e) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path+File.separator +"map.ser"))) {
+            out.writeObject(rooms);
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        json = gson.toJson(player);
-        try (FileWriter writer = new FileWriter(path + "/player.json")) {
-
-
-            writer.write(json);
-
-
-        } catch (Exception e) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path+File.separator +"player.ser"))) {
+            out.writeObject(player);
+        } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Saved");
+
+
     }
 }
