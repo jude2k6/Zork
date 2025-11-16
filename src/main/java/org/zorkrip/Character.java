@@ -2,11 +2,14 @@ package org.zorkrip;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Character implements Serializable {
+
+abstract class Character implements Serializable, Inventory {
     private String name;
     private Room currentRoom;
     private ArrayList<Item> inventory;
+
 
     public Character(String name, Room startingRoom) {
         this.name = name;
@@ -17,9 +20,12 @@ public class Character implements Serializable {
         return name;
     }
 
+
+    /// MOVMENT
     public Room getCurrentRoom() {
         return currentRoom;
     }
+
 
     public void setCurrentRoom(Room room) {
         this.currentRoom = room;
@@ -34,4 +40,16 @@ public class Character implements Serializable {
             System.out.println("You can't go that way!");
         }
     }
+
+
+    /// INVENTORY
+
+    @Override
+    public List<Item> getInventory() {
+        if (inventory == null) inventory = new ArrayList<>();
+        return inventory;
+    }
+
+
+
 }

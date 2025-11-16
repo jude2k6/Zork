@@ -13,6 +13,8 @@ public class CommandWords {
         validCommands.put("help", "Show help");
         validCommands.put("look", "Look around");
         validCommands.put("eat", "Eat something");
+        validCommands.put("take","Pickup something");
+        validCommands.put("drop","Drop something");
     }
 
     public boolean isCommand(String commandWord) {

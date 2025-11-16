@@ -51,6 +51,11 @@ public class ZorkULGame {
         System.out.println("Type 'help' if you need help.");
         System.out.println();
         System.out.println(player.getCurrentRoom().getLongDescription());
+        System.out.print("Items: ");
+        player.getCurrentRoom().printItems();
+        System.out.print("player inv: ");
+        player.printItems();
+
     }
 
     private boolean processCommand(Command command) {
@@ -68,6 +73,14 @@ public class ZorkULGame {
             case "go":
                 goRoom(command);
                 break;
+            case "take":{
+                take(command);
+                break;
+            }
+            case "drop":{
+                drop(command);
+                break;
+            }
             case "quit":
                 if (command.hasSecondWord()) {
                     System.out.println("Quit what?");
@@ -79,6 +92,7 @@ public class ZorkULGame {
 
                     return true; // signal to quit
                 }
+
             default:
                 System.out.println("I don't know what you mean...");
                 break;
@@ -107,8 +121,53 @@ public class ZorkULGame {
         } else {
             player.setCurrentRoom(nextRoom);
             System.out.println(player.getCurrentRoom().getLongDescription());
+            System.out.print("Items: ");
+            player.getCurrentRoom().printItems();
+            System.out.print("player inv: ");
+            player.printItems();
+
         }
     }
+    private void take(Command command){
+        if (!command.hasSecondWord()) {
+            System.out.println("Pick up what");
+            return;
+        }
+
+        String item = command.getSecondWord();
+
+        Room room = player.getCurrentRoom();
+            for(int i =0;i<room.getNumberItems();i++){
+                if(room.getItemAtIndex(i).getName().equalsIgnoreCase(item)){
+                    player.addItem(room.getItemAtIndex(i));
+                    room.removeItem(i);
+
+                }
+            }
+    }
+
+
+
+
+    private void drop(Command command){
+        if (!command.hasSecondWord()) {
+            System.out.println("drop up what");
+            return;
+        }
+
+        String item = command.getSecondWord();
+
+        Room room = player.getCurrentRoom();
+        for(int i =0;i<player.getNumberItems();i++){
+            if(player.getItemAtIndex(i).getName().equalsIgnoreCase(item)){
+                room.addItem(player.getItemAtIndex(i));
+                player.removeItem(i);
+
+            }
+        }
+    }
+
+
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -124,8 +183,11 @@ public class ZorkULGame {
 
         } else {
             rooms = Loadmap.loadmap();
-            player = new Character("Player", rooms.get("Outside"));
+            player = new Player("Player", rooms.get("Outside"));
             player.setCurrentRoom(rooms.get("Outside"));
+
+            rooms.get("Outside").addItem(new Item("bread","yujmy"));
+
         }
 
 

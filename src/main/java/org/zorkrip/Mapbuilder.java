@@ -45,18 +45,20 @@ public class Mapbuilder {
 
             Type type = new TypeToken<Map<String,Room>>(){}.getType();
             Map<String,Room> rooms = gson.fromJson(reader, type);
-
+            // outside
             rooms.get("Outside").setExit("east", rooms.get("Theatre"));
             rooms.get("Outside").setExit("south", rooms.get("Lab"));
             rooms.get("Outside").setExit("west", rooms.get("Pub"));
 
+            rooms.get("Outside").addItem(new Item("Bread","yummy"));
+            // theatre
             rooms.get("Theatre").setExit("west", rooms.get("Outside"));
-
+            // pub
             rooms.get("Pub").setExit("east", rooms.get("Outside"));
-
+            // lab
             rooms.get("Lab").setExit("north", rooms.get("Outside"));
             rooms.get("Lab").setExit("east", rooms.get("Office"));
-
+            // office
             rooms.get("Office").setExit("west", rooms.get("Lab"));
 
 

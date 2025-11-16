@@ -2,18 +2,20 @@ package org.zorkrip;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 
-public class Room  implements Serializable {
+public class Room implements Serializable, Inventory {
     private String description;
     private Map<String, Room> exits; // Map direction to neighboring Room
-    private ArrayList<String> items;
+    private ArrayList<Item> inventory;
 
     public Room(String description) {
 
         exits = new HashMap<>();
-        items = new ArrayList<>();
+        inventory = new ArrayList<>();
+        this.description=description;
 
     }
 
@@ -25,7 +27,7 @@ public class Room  implements Serializable {
         exits.put(direction, neighbor);
     }
 
-    public void removeExits(){
+    public void removeExits() {
         exits = new HashMap<>();
     }
 
@@ -44,4 +46,19 @@ public class Room  implements Serializable {
     public String getLongDescription() {
         return "You are " + description + ".\nExits: " + getExitString();
     }
+
+
+
+
+
+    @Override
+    public List<Item> getInventory() {
+        if (inventory == null) inventory = new ArrayList<>();
+        return inventory;
+    }
+
+
+
 }
+
+
