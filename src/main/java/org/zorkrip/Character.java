@@ -31,7 +31,7 @@ abstract class Character implements Serializable, Inventory {
         this.currentRoom = room;
     }
 
-    public void move(String direction) {
+    /*public void move(String direction) {
         Room nextRoom = currentRoom.getExit(direction);
         if (nextRoom != null) {
             currentRoom = nextRoom;
@@ -39,7 +39,7 @@ abstract class Character implements Serializable, Inventory {
         } else {
             System.out.println("You can't go that way!");
         }
-    }
+    }*/
 
 
     /// INVENTORY

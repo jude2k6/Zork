@@ -1,3 +1,4 @@
+/*
 package org.zorkrip;
 
 import java.lang.reflect.Field;
@@ -71,3 +72,4 @@ public class DebugPrinter {
 
 }}
 
+*/

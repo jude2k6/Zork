@@ -73,12 +73,17 @@ public class ZorkULGame {
             case "go":
                 goRoom(command);
                 break;
-            case "take":{
+            case "take": {
                 take(command);
                 break;
             }
-            case "drop":{
+            case "drop": {
                 drop(command);
+                break;
+            }
+
+            case "open":{
+                open(command);
                 break;
             }
             case "quit":
@@ -114,21 +119,32 @@ public class ZorkULGame {
 
         String direction = command.getSecondWord();
 
-        Room nextRoom = player.getCurrentRoom().getExit(direction);
+        Exit exit = player.getCurrentRoom().getExit(direction);
 
-        if (nextRoom == null) {
+        if (exit == null) {
             System.out.println("There is no door!");
         } else {
-            player.setCurrentRoom(nextRoom);
-            System.out.println(player.getCurrentRoom().getLongDescription());
-            System.out.print("Items: ");
-            player.getCurrentRoom().printItems();
-            System.out.print("player inv: ");
-            player.printItems();
+            Room nextRoom = exit.getNeighbour();
+            if (!player.getCurrentRoom().getExit(direction).isLocked()) {
+                player.setCurrentRoom(nextRoom);
+                System.out.println(player.getCurrentRoom().getLongDescription());
+                System.out.print("Items: ");
+                player.getCurrentRoom().printItems();
+                System.out.print("player inv: ");
+                player.printItems();
+            }
+            else {
+                System.out.println("door is locked");
+            }
+
+
+
+
 
         }
     }
-    private void take(Command command){
+
+    private void take(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Pick up what");
             return;
@@ -137,19 +153,17 @@ public class ZorkULGame {
         String item = command.getSecondWord();
 
         Room room = player.getCurrentRoom();
-            for(int i =0;i<room.getNumberItems();i++){
-                if(room.getItemAtIndex(i).getName().equalsIgnoreCase(item)){
-                    player.addItem(room.getItemAtIndex(i));
-                    room.removeItem(i);
+        for (int i = 0; i < room.getNumberItems(); i++) {
+            if (room.getItemAtIndex(i).getName().equalsIgnoreCase(item)) {
+                player.addItem(room.getItemAtIndex(i));
+                room.removeItem(i);
 
-                }
             }
+        }
     }
 
 
-
-
-    private void drop(Command command){
+    private void drop(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("drop up what");
             return;
@@ -158,13 +172,38 @@ public class ZorkULGame {
         String item = command.getSecondWord();
 
         Room room = player.getCurrentRoom();
-        for(int i =0;i<player.getNumberItems();i++){
-            if(player.getItemAtIndex(i).getName().equalsIgnoreCase(item)){
+        for (int i = 0; i < player.getNumberItems(); i++) {
+            if (player.getItemAtIndex(i).getName().equalsIgnoreCase(item)) {
                 room.addItem(player.getItemAtIndex(i));
                 player.removeItem(i);
 
             }
         }
+    }
+
+    private void open(Command command){
+        if (!command.hasSecondWord()) {
+            System.out.println("open what");
+            return;
+        }
+        else {
+            String target = command.getSecondWord();
+            Exit exit = player.getCurrentRoom().getExit(target);
+            if (!exit.isLocked()){
+                System.out.println("Door is not locked");
+            }
+            else if(player.getIndexOfItem(exit.getKey()) !=-1){
+                exit.unlock();
+                player.removeItem(player.getIndexOfItem(exit.getKey()));
+            }
+            else {
+                System.out.println("You dont have the right key");
+            }
+
+        }
+
+
+
     }
 
 
@@ -186,7 +225,10 @@ public class ZorkULGame {
             player = new Player("Player", rooms.get("Outside"));
             player.setCurrentRoom(rooms.get("Outside"));
 
-            rooms.get("Outside").addItem(new Item("bread","yujmy"));
+            rooms.get("Outside").addItem(new Item("bread", "yujmy"));
+            rooms.get("Outside").addItem(new Item("rusty-key", "f67"));
+
+
 
         }
 

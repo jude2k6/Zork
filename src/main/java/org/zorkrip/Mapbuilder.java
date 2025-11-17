@@ -17,18 +17,24 @@ public class Mapbuilder {
             Type type = new TypeToken<Map<String,Room>>(){}.getType();
             Map<String,Room> rooms = gson.fromJson(reader, type);
 
-            rooms.get("Outside").setExit("east", rooms.get("Theatre"));
-            rooms.get("Outside").setExit("south", rooms.get("Lab"));
-            rooms.get("Outside").setExit("west", rooms.get("Pub"));
+            // Outside
+            rooms.get("Outside").setExit("east", new Exit("east", rooms.get("Theatre"),true,"rusty-key"));
+            rooms.get("Outside").setExit("south", new Exit("south", rooms.get("Lab")));
+            rooms.get("Outside").setExit("west", new Exit("west", rooms.get("Pub")));
+            rooms.get("Outside").addItem(new Item("Bread", "yummy"));
 
-            rooms.get("Theatre").setExit("west", rooms.get("Outside"));
+// Theatre
+            rooms.get("Theatre").setExit("west", new Exit("west", rooms.get("Outside")));
 
-            rooms.get("Pub").setExit("east", rooms.get("Outside"));
+// Pub
+            rooms.get("Pub").setExit("east", new Exit("east", rooms.get("Outside")));
 
-            rooms.get("Lab").setExit("north", rooms.get("Outside"));
-            rooms.get("Lab").setExit("east", rooms.get("Office"));
+// Lab
+            rooms.get("Lab").setExit("north", new Exit("north", rooms.get("Outside")));
+            rooms.get("Lab").setExit("east", new Exit("east", rooms.get("Office")));
 
-            rooms.get("Office").setExit("west", rooms.get("Lab"));
+// Office
+            rooms.get("Office").setExit("west", new Exit("west", rooms.get("Lab")));
             Serialize.serialiseRoom(rooms);
         } catch (Exception e) {
             System.out.println("shits broken");
@@ -45,21 +51,26 @@ public class Mapbuilder {
 
             Type type = new TypeToken<Map<String,Room>>(){}.getType();
             Map<String,Room> rooms = gson.fromJson(reader, type);
-            // outside
-            rooms.get("Outside").setExit("east", rooms.get("Theatre"));
-            rooms.get("Outside").setExit("south", rooms.get("Lab"));
-            rooms.get("Outside").setExit("west", rooms.get("Pub"));
 
-            rooms.get("Outside").addItem(new Item("Bread","yummy"));
-            // theatre
-            rooms.get("Theatre").setExit("west", rooms.get("Outside"));
-            // pub
-            rooms.get("Pub").setExit("east", rooms.get("Outside"));
-            // lab
-            rooms.get("Lab").setExit("north", rooms.get("Outside"));
-            rooms.get("Lab").setExit("east", rooms.get("Office"));
-            // office
-            rooms.get("Office").setExit("west", rooms.get("Lab"));
+            // Outside
+            rooms.get("Outside").setExit("east", new Exit("east", rooms.get("Theatre")));
+            rooms.get("Outside").setExit("south", new Exit("south", rooms.get("Lab")));
+            rooms.get("Outside").setExit("west", new Exit("west", rooms.get("Pub")));
+            rooms.get("Outside").addItem(new Item("Bread", "yummy"));
+
+// Theatre
+            rooms.get("Theatre").setExit("west", new Exit("west", rooms.get("Outside")));
+
+// Pub
+            rooms.get("Pub").setExit("east", new Exit("east", rooms.get("Outside")));
+
+// Lab
+            rooms.get("Lab").setExit("north", new Exit("north", rooms.get("Outside")));
+            rooms.get("Lab").setExit("east", new Exit("east", rooms.get("Office")));
+
+// Office
+            rooms.get("Office").setExit("west", new Exit("west", rooms.get("Lab")));
+
 
 
 
@@ -99,18 +110,24 @@ public class Mapbuilder {
             Type type = new TypeToken<Map<String,Room>>(){}.getType();
             Map<String,Room> rooms = gson.fromJson(reader, type);
 
-            rooms.get("Outside").setExit("east", rooms.get("Theatre"));
-            rooms.get("Outside").setExit("south", rooms.get("Lab"));
-            rooms.get("Outside").setExit("west", rooms.get("Pub"));
+            // Outside
+            rooms.get("Outside").setExit("east", new Exit("east", rooms.get("Theatre"),true,"key"));
+            rooms.get("Outside").setExit("south", new Exit("south", rooms.get("Lab")));
+            rooms.get("Outside").setExit("west", new Exit("west", rooms.get("Pub")));
+            rooms.get("Outside").addItem(new Item("Bread", "yummy"));
 
-            rooms.get("Theatre").setExit("west", rooms.get("Outside"));
+// Theatre
+            rooms.get("Theatre").setExit("west", new Exit("west", rooms.get("Outside")));
 
-            rooms.get("Pub").setExit("east", rooms.get("Outside"));
+// Pub
+            rooms.get("Pub").setExit("east", new Exit("east", rooms.get("Outside")));
 
-            rooms.get("Lab").setExit("north", rooms.get("Outside"));
-            rooms.get("Lab").setExit("east", rooms.get("Office"));
+// Lab
+            rooms.get("Lab").setExit("north", new Exit("north", rooms.get("Outside")));
+            rooms.get("Lab").setExit("east", new Exit("east", rooms.get("Office")));
 
-            rooms.get("Office").setExit("west", rooms.get("Lab"));
+// Office
+            rooms.get("Office").setExit("west", new Exit("west", rooms.get("Lab")));
 
 
 

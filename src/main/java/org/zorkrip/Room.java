@@ -1,21 +1,18 @@
 package org.zorkrip;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Room implements Serializable, Inventory {
     private String description;
-    private Map<String, Room> exits; // Map direction to neighboring Room
+    private Map<String, Exit> exits; // Map direction to neighboring Room
     private ArrayList<Item> inventory;
 
     public Room(String description) {
 
-        exits = new HashMap<>();
+        exits = new LinkedHashMap<>();
         inventory = new ArrayList<>();
-        this.description=description;
+        this.description = description;
 
     }
 
@@ -23,7 +20,7 @@ public class Room implements Serializable, Inventory {
         return description;
     }
 
-    public void setExit(String direction, Room neighbor) {
+    public void setExit(String direction, Exit neighbor) {
         exits.put(direction, neighbor);
     }
 
@@ -31,7 +28,7 @@ public class Room implements Serializable, Inventory {
         exits = new HashMap<>();
     }
 
-    public Room getExit(String direction) {
+    public Exit getExit(String direction) {
         return exits.get(direction);
     }
 
@@ -48,9 +45,6 @@ public class Room implements Serializable, Inventory {
     }
 
 
-
-
-
     @Override
     public List<Item> getInventory() {
         if (inventory == null) inventory = new ArrayList<>();
@@ -58,7 +52,39 @@ public class Room implements Serializable, Inventory {
     }
 
 
-
 }
 
+class Exit implements Serializable {
 
+    private String direction;
+    private Room neighbour;
+    private boolean locked;
+    private String key;
+
+
+    public Exit(String direction, Room neighbour) {
+        this.direction = direction;
+        this.neighbour = neighbour;
+    }
+
+    public Exit(String direction, Room neighbour, boolean locked, String key) {
+        this.direction = direction;
+        this.neighbour = neighbour;
+        this.locked = locked;
+        this.key = key;
+    }
+
+    public Room getNeighbour() {
+        return neighbour;
+    }
+
+    public boolean isLocked() {
+        return locked;
+    }
+
+    public String getKey(){return key;}
+
+    public void unlock(){
+        locked = false;
+    }
+}
