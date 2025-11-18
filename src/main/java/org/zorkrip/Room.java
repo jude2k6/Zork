@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Room implements Serializable, Inventory {
-    private String description;
+    private final String description;
     private Map<String, Exit> exits; // Map direction to neighboring Room
     private ArrayList<Item> inventory;
 
@@ -24,9 +24,7 @@ public class Room implements Serializable, Inventory {
         exits.put(direction, neighbor);
     }
 
-    public void removeExits() {
-        exits = new HashMap<>();
-    }
+
 
     public Exit getExit(String direction) {
         return exits.get(direction);
@@ -38,6 +36,13 @@ public class Room implements Serializable, Inventory {
             sb.append(direction).append(" ");
         }
         return sb.toString().trim();
+    }
+
+
+    public String getRoomDescription(){
+        return getLongDescription() +
+                "\n" +
+                "Items: " + printItems();
     }
 
     public String getLongDescription() {
@@ -57,7 +62,7 @@ public class Room implements Serializable, Inventory {
 class Exit implements Serializable {
 
     private String direction;
-    private Room neighbour;
+    private final Room neighbour;
     private boolean locked;
     private String key;
 
@@ -79,7 +84,7 @@ class Exit implements Serializable {
     }
 
     public boolean isLocked() {
-        return locked;
+        return !locked;
     }
 
     public String getKey(){return key;}

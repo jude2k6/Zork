@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CommandWords {
-    private Map<String, String> validCommands;
+    private final Map<String, String> validCommands;
 
     public CommandWords() {
         validCommands = new HashMap<>();
@@ -22,11 +22,13 @@ public class CommandWords {
         return validCommands.containsKey(commandWord);
     }
 
-    public void showAll() {
-        System.out.print("Valid commands are: ");
+    public String showAll() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Valid commands are: ");
         for (String command : validCommands.keySet()) {
-            System.out.print(command + " ");
+            sb.append(command).append(" ");
         }
-        System.out.println();
+        sb.append("\n");
+        return sb.toString();
     }
 }

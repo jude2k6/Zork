@@ -2,6 +2,7 @@ package org.zorkrip;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.Map;
@@ -14,14 +15,16 @@ public class Mapbuilder {
         try (Reader reader = new FileReader(System.getProperty("user.dir") + "/src/main/java/org/zorkrip/map.json")) {
             Gson gson = new Gson();
 
-            Type type = new TypeToken<Map<String,Room>>(){}.getType();
-            Map<String,Room> rooms = gson.fromJson(reader, type);
+            Type type = new TypeToken<Map<String, Room>>() {
+            }.getType();
+            Map<String, Room> rooms = gson.fromJson(reader, type);
 
             // Outside
-            rooms.get("Outside").setExit("east", new Exit("east", rooms.get("Theatre"),true,"rusty-key"));
+            rooms.get("Outside").setExit("east", new Exit("east", rooms.get("Theatre"), true, "rusty-key"));
             rooms.get("Outside").setExit("south", new Exit("south", rooms.get("Lab")));
             rooms.get("Outside").setExit("west", new Exit("west", rooms.get("Pub")));
             rooms.get("Outside").addItem(new Item("Bread", "yummy"));
+            rooms.get("Outside").addItem(new Item("rusty-key", "f67"));
 
 // Theatre
             rooms.get("Theatre").setExit("west", new Exit("west", rooms.get("Outside")));
@@ -45,47 +48,8 @@ public class Mapbuilder {
 
     }
 
-    public static Map<String,Room> loadmap() {
-        try (Reader reader = new FileReader(System.getProperty("user.dir") + "/src/main/java/org/zorkrip/map.json")) {
-            Gson gson = new Gson();
 
-            Type type = new TypeToken<Map<String,Room>>(){}.getType();
-            Map<String,Room> rooms = gson.fromJson(reader, type);
-
-            // Outside
-            rooms.get("Outside").setExit("east", new Exit("east", rooms.get("Theatre")));
-            rooms.get("Outside").setExit("south", new Exit("south", rooms.get("Lab")));
-            rooms.get("Outside").setExit("west", new Exit("west", rooms.get("Pub")));
-            rooms.get("Outside").addItem(new Item("Bread", "yummy"));
-
-// Theatre
-            rooms.get("Theatre").setExit("west", new Exit("west", rooms.get("Outside")));
-
-// Pub
-            rooms.get("Pub").setExit("east", new Exit("east", rooms.get("Outside")));
-
-// Lab
-            rooms.get("Lab").setExit("north", new Exit("north", rooms.get("Outside")));
-            rooms.get("Lab").setExit("east", new Exit("east", rooms.get("Office")));
-
-// Office
-            rooms.get("Office").setExit("west", new Exit("west", rooms.get("Lab")));
-
-
-
-
-            return rooms;
-
-        } catch (Exception e) {
-            System.out.println("shits null");
-            e.printStackTrace(); // This shows the real error
-            return null;
-        }
-
-
-    }
-
-    public class Serialize {
+    public static class Serialize {
         public static void serialiseRoom(Map<String, Room> room) {
 
 
@@ -99,52 +63,6 @@ public class Mapbuilder {
 
         }
     }
-
-
-
-
-    public static Map<String,Room> loadmap(String path) {
-        try (Reader reader = new FileReader(path+"/map.json")) {
-            Gson gson = new Gson();
-
-            Type type = new TypeToken<Map<String,Room>>(){}.getType();
-            Map<String,Room> rooms = gson.fromJson(reader, type);
-
-            // Outside
-            rooms.get("Outside").setExit("east", new Exit("east", rooms.get("Theatre"),true,"key"));
-            rooms.get("Outside").setExit("south", new Exit("south", rooms.get("Lab")));
-            rooms.get("Outside").setExit("west", new Exit("west", rooms.get("Pub")));
-            rooms.get("Outside").addItem(new Item("Bread", "yummy"));
-
-// Theatre
-            rooms.get("Theatre").setExit("west", new Exit("west", rooms.get("Outside")));
-
-// Pub
-            rooms.get("Pub").setExit("east", new Exit("east", rooms.get("Outside")));
-
-// Lab
-            rooms.get("Lab").setExit("north", new Exit("north", rooms.get("Outside")));
-            rooms.get("Lab").setExit("east", new Exit("east", rooms.get("Office")));
-
-// Office
-            rooms.get("Office").setExit("west", new Exit("west", rooms.get("Lab")));
-
-
-
-            return rooms;
-
-        } catch (Exception e) {
-            System.out.println("shits null");
-            e.printStackTrace(); // This shows the real error
-            return null;
-        }
-
-
-    }
-
-
-
-
 
 
 }

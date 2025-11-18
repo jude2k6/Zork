@@ -21,22 +21,23 @@ interface Inventory {
     }
 
 
-    default void printItems() {
+    default String printItems() {
+        StringBuilder sb = new StringBuilder();
+
         if (getInventory().isEmpty()) {
             System.out.println();
-            return;
+            return"";
         }
 
         for (int i = 0; i < getInventory().size(); i++) {
-            System.out.print(getItemAtIndex(i).getName());
+            sb.append(getItemAtIndex(i).getName());
             if (i + 1 < getInventory().size()) {
-                System.out.println(",");
+                sb.append(",");
             }
         }
-        System.out.println();
+        sb.append("\n");
+        return sb.toString();
     }
-
-
 
 
     default int getIndexOfItem(String item) {
