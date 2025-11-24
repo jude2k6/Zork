@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400" prefWidth="600"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.zorkrip.ui.fx.LoadController">
+
+    <VBox alignment="CENTER" spacing="20" layoutX="200" layoutY="120">
+        <Button text="New Game" fx:id="newgame" onAction="#newGame" prefWidth="200"/>
+        <Button text="Load Game" fx:id="loadgame" onAction="#loadGame" prefWidth="200"/>
+        <Button text="Back" fx:id="back" onAction="#back" prefWidth="200"/>
+    </VBox>
+
+</AnchorPane>

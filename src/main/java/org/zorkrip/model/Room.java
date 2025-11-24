@@ -42,7 +42,7 @@ public class Room implements Serializable, Inventory {
     public String getRoomDescription(){
         return getLongDescription() +
                 "\n" +
-                "Items: " + printItems();
+                "Items: " + printItems()+"\n";
     }
 
     public String getLongDescription() {

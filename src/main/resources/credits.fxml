@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.zorkrip.ui.fx.CreditsController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <!-- Main container -->
+    <VBox alignment="CENTER" spacing="30" layoutX="150" layoutY="50">
+
+        <!-- Title -->
+        <Label text="Credits" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+        <!-- List of team members or roles -->
+        <VBox alignment="CENTER" spacing="10">
+            <Label text="Game Design: Jude Delaney" style="-fx-font-size: 16px;"/>
+            <Label text="Programming: Jude Delaney" style="-fx-font-size: 16px;"/>
+            <Label text="Art &amp; Graphics: Chatters" style="-fx-font-size: 16px;"/>
+
+        </VBox>
+
+        <!-- Back button -->
+        <Button text="Back" fx:id="back" onAction="#back" prefWidth="120" prefHeight="30"/>
+
+    </VBox>
+
+</AnchorPane>

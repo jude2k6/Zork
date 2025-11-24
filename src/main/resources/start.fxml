@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400" prefWidth="600"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.zorkrip.ui.fx.StartController">
+
+    <VBox alignment="CENTER" spacing="20" layoutX="200" layoutY="120">
+        <Button text="Start" fx:id="start" onAction="#play" prefWidth="200"/>
+        <Button text="Quit" fx:id="quit" onAction="#quit" prefWidth="200"/>
+        <Button text="Credits" fx:id="credits" onAction="#credits" prefWidth="200"/>
+    </VBox>
+
+</AnchorPane>
