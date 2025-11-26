@@ -8,21 +8,12 @@ import java.io.*;
 import java.util.Map;
 import java.util.Scanner;
 
-public class save {
+public class Save {
 
 
-    public static void saveGame(Map<String, Room> rooms, Player player) {
+    public static void saveGame(Map<String, Room> rooms, Player player, String path) {
 
-        Scanner input2 = new Scanner(System.in);
-        System.out.println("Enter your save directory ");
-        String path = input2.nextLine();
-        File dir = new File(path);
-        if (!dir.exists()) {
-            if (!dir.mkdirs()) {
-                System.out.println("Failed to create directory: " + path);
-                return;
-            }
-        }
+
 
 
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path+File.separator +"map.ser"))) {
@@ -35,7 +26,7 @@ public class save {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Saved");
+
 
 
     }

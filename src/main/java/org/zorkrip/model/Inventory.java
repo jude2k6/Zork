@@ -50,6 +50,26 @@ interface Inventory {
     }
 
 
+    default String viewInventory() {
+        StringBuilder sb = new StringBuilder();
+
+        if (getInventory().isEmpty()) {
+            System.out.println();
+            return"";
+        }
+
+        for (int i = 0; i < getInventory().size(); i++) {
+            sb.append(getItemAtIndex(i).getName());
+            if (i + 1 < getInventory().size()) {
+                sb.append("\n");
+            }
+        }
+
+        return sb.toString();
+    }
+
+
+
     default int getNumberItems() {
         try {
             return getInventory().toArray().length;

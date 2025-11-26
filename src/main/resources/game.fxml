@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/17.0.12"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.zorkrip.ui.fx.GameController">
+<AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.zorkrip.ui.fx.GameController">
 
-    <!-- Main Console -->
-    <TextArea fx:id="console" layoutX="14.0" layoutY="14.0"
-              prefWidth="572.0" prefHeight="320.0"
-              wrapText="true"
-              editable="false"
-              style="-fx-font-family: 'Consolas'; -fx-font-size: 14;"/>
 
-    <!-- User input + button -->
-    <HBox layoutX="14.0" layoutY="352.0" spacing="10">
-        <TextField fx:id="userInput" prefWidth="480.0" prefHeight="26.0"
-                   promptText="Enter command..." />
-        <Button fx:id="enterButton" text="Enter" onAction="#enterCommand"
-                prefWidth="80.0" prefHeight="26.0"/>
+
+    <TextArea fx:id="inventory" editable="false" style="-fx-font-family: 'Consolas'; -fx-font-size: 14;" wrapText="true" AnchorPane.bottomAnchor="60" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="510" AnchorPane.topAnchor="10" />
+    <!-- console -->
+    <TextArea fx:id="console" editable="false" style="-fx-font-family: 'Consolas'; -fx-font-size: 14;" wrapText="true" AnchorPane.bottomAnchor="60" AnchorPane.leftAnchor="100" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10" />
+
+    <!-- input -->
+    <HBox spacing="10" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
+        <Button fx:id="quitButton" minWidth="80" onAction="#quitGame" text="Quit" />
+        <TextField fx:id="userInput" promptText="Enter command..." HBox.hgrow="ALWAYS" />
+
+        <Button fx:id="enterButton" minWidth="80" onAction="#enterCommand" text="Enter" />
     </HBox>
+
 
 </AnchorPane>

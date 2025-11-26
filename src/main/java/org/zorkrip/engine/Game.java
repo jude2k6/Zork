@@ -1,8 +1,9 @@
+/*
 package org.zorkrip.engine;
 
 import java.util.Scanner;
 
-public class Game {
+public class Game implements ZorkInterface {
 
     public static void main(String[] args) {
         ZorkEngine game;
@@ -11,7 +12,7 @@ public class Game {
         String choice = input.nextLine();
 
         if (choice.equals("load")) {
-            System.out.println("Enter your save folder path");
+            System.out.println("Enter your Save folder path");
             String path = input.nextLine();
             game = new ZorkEngine(path);
         } else {
@@ -29,3 +30,4 @@ public class Game {
 
 
 }
+*/

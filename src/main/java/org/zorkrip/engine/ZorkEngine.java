@@ -1,6 +1,6 @@
 package org.zorkrip.engine;
 /* This game is a classic text-based adventure set in a university environment.
-   The player starts outside the main entrance and can navigate through different rooms like a 
+   The player starts outside the main entrance and can navigate through different rooms like a
    lecture theatre, campus pub, computing lab, and admin office using simple text commands (e.g., "go east", "go west").
     The game provides descriptions of each location and lists possible exits.
 
@@ -10,7 +10,7 @@ Simple command parser: Recognizes a limited set of commands like "go", "help", a
 Player character: Tracks current location and handles moving between rooms.
 Text descriptions: Provides immersive text output describing the player's surroundings and available options.
 Help system: Lists valid commands to guide the player.
-Overall, it recreates the classic Zork interactive fiction experience with a university-themed setting, 
+Overall, it recreates the classic Zork interactive fiction experience with a university-themed setting,
 emphasizing exploration and simple command-driven gameplay
 */
 
@@ -19,11 +19,12 @@ import org.zorkrip.model.Player;
 import org.zorkrip.model.Room;
 import org.zorkrip.persistence.LoadCharacter;
 import org.zorkrip.persistence.Loadmap;
-import org.zorkrip.persistence.save;
 
 import java.util.Map;
 
-public class ZorkEngine {
+import static org.zorkrip.persistence.Save.saveGame;
+
+public class ZorkEngine implements GameEngine {
     private final Parser parser;
     private static Player player;
     private static Map<String, Room> rooms;
@@ -45,8 +46,30 @@ public class ZorkEngine {
 
     }
 
+    @Override
+    public String getWelcomeMessage() {
+        return printWelcome();
+    }
+
+    @Override
+    public String handleInput(String input) {
+        return play(input);
+    }
+
     public boolean isRunning() {
         return running;
+    }
+
+    @Override
+    public String viewInventory() {
+        return player.viewInventory();
+    }
+
+    @Override
+    public Void saveGameInterface(String path) {
+
+        saveGame(rooms,player,path);
+        return null;
     }
 
     public String play(String s) {
@@ -64,14 +87,14 @@ public class ZorkEngine {
                 "Welcome to the University adventure!\n" +
                 "Type 'help' if you need help." +
                 "\n" +
-                player.getCurrentRoom().getRoomDescription()+"\n";
+                player.getCurrentRoom().getRoomDescription() + "\n";
     }
 
     private String processCommand(Command command) {
         String commandWord = command.getCommandWord();
 
         if (commandWord == null) {
-            return "I don't understand your command...";
+            return "I don't understand your command...\n";
         }
 
         switch (commandWord) {
@@ -93,17 +116,7 @@ public class ZorkEngine {
                 return open(command);
 
             }
-            case "quit":
-                if (command.hasSecondWord()) {
 
-                    return "Quit what?";
-                } else {
-
-                    save.saveGame(rooms, player);
-
-                    running = false;
-                    return "QUIT"; // signal to quit
-                }
 
             default:
                 return "I don't know what you mean...";
@@ -112,16 +125,16 @@ public class ZorkEngine {
 
     }
 
-    private String  printHelp() {
+    private String printHelp() {
         return "You are lost. You are alone. You wander around the university.\n" +
                 "Your command words are: " +
-                parser.showCommands();
+                parser.showCommands() + "\n";
     }
 
     private String goRoom(Command command) {
         if (!command.hasSecondWord()) {
 
-            return "Go where?";
+            return "Go where?+\n";
         }
 
         String direction = command.getSecondWord();
@@ -129,7 +142,7 @@ public class ZorkEngine {
         Exit exit = player.getCurrentRoom().getExit(direction);
 
         if (exit == null) {
-            return "There is no door!"+"\n";
+            return "There is no door!" + "\n";
         } else {
             Room nextRoom = exit.getNeighbour();
             if (player.getCurrentRoom().getExit(direction).isLocked()) {
@@ -137,7 +150,7 @@ public class ZorkEngine {
 
                 return player.getCurrentRoom().getRoomDescription();
             } else {
-                return "door is locked"+"\n";
+                return "door is locked" + "\n";
             }
 
 
@@ -158,7 +171,7 @@ public class ZorkEngine {
             if (room.getItemAtIndex(i).getName().equalsIgnoreCase(item)) {
                 player.addItem(room.getItemAtIndex(i));
                 room.removeItem(i);
-
+                return "";
             }
         }
         return "There is no" + command.getSecondWord() + "to take\n";
@@ -186,13 +199,13 @@ public class ZorkEngine {
 
     private String open(Command command) {
         if (!command.hasSecondWord()) {
-            return "Open what";
+            return "Open what\n";
 
         } else {
             String target = command.getSecondWord();
             Exit exit = player.getCurrentRoom().getExit(target);
             if (exit.isLocked()) {
-                return "Door is not locked";
+                return "Door is not locked\n";
             } else if (player.getIndexOfItem(exit.getKey()) != -1) {
                 exit.unlock();
                 player.removeItem(player.getIndexOfItem(exit.getKey()));
@@ -207,33 +220,4 @@ public class ZorkEngine {
     }
 
 
-//    public static void main(String[] args) {
-//        Scanner input = new Scanner(System.in);
-//        System.out.println("Load");
-//        String choice = input.nextLine();
-//
-//        if (choice.equals("load")) {
-//            System.out.println("Enter your save folder path");
-//            String path = input.nextLine();
-//            rooms = Loadmap.loadmap(path);
-//            player = LoadCharacter.loadPlayer(path);
-//            System.out.println(player.getCurrentRoom());
-//
-//        } else {
-//            rooms = Loadmap.loadmap();
-//            player = new Player("Player", rooms.get("Outside"));
-//            player.setCurrentRoom(rooms.get("Outside"));
-//
-//
-//
-//
-//
-//        }
-//
-//
-//        ZorkEngine game = new ZorkEngine();
-//
-//
-//        game.play();
-//    }
 }
