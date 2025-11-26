@@ -6,7 +6,6 @@ import org.zorkrip.model.Room;
 
 import java.io.*;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Save {
 

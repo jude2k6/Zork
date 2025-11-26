@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -22,7 +21,7 @@
             <Label text="Art &amp; Graphics: Chatters" style="-fx-font-size: 16px;"/>
         </VBox>
 
-        <Button text="Back" fx:id="back" onAction="#back" prefWidth="120" prefHeight="30"/>
+        <Button text="Back" fx:id="backButton" onAction="#back" prefWidth="120" prefHeight="30"/>
 
     </VBox>
 

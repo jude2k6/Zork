@@ -1,9 +1,8 @@
 package org.zorkrip.model;
 
-import java.util.ArrayList;
 
 public class Player extends Character {
-    private ArrayList<Item> inventory;
+    private boolean enhancedSight;
 
     public Player(String name, Room startingRoom){
         super(name, startingRoom);
@@ -11,4 +10,11 @@ public class Player extends Character {
     }
 
 
+    public boolean isEnhancedSight() {
+        return enhancedSight;
+    }
+
+    public void setEnhancedSight(boolean enhancedSight) {
+        this.enhancedSight = enhancedSight;
+    }
 }

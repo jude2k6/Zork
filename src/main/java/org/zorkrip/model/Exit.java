@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Exit implements Serializable {
 
-    private String direction;
+    private final String direction;
     private final Room neighbour;
     private boolean locked;
     private String key;

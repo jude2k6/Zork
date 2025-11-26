@@ -4,6 +4,9 @@ package org.zorkrip.ui.fx;
 
 import javafx.fxml.FXML;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -13,6 +16,7 @@ import javafx.stage.Stage;
 import org.zorkrip.engine.GameEngine;
 import org.zorkrip.engine.ZorkEngine;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class GameController {
@@ -21,7 +25,7 @@ public class GameController {
     public AnchorPane rootPane;
     public TextArea inventory;
     public Button quitButton;
-    GameEngine game;
+    final GameEngine game;
 
     public String inventoryString;
 
@@ -44,6 +48,7 @@ public class GameController {
         console.appendText(game.getWelcomeMessage());
 
         userInput.setOnAction(e -> enterCommand());
+        updateInventory(inventoryString);
     }
 
 
@@ -68,9 +73,10 @@ public class GameController {
     }
 
 
-    public void quitGame() {
+    public void quitGame() throws IOException {
 
         Stage stage;
+        Parent root;
         stage = (Stage) quitButton.getScene().getWindow();
 
 
@@ -78,6 +84,9 @@ public class GameController {
         directoryChooser.setTitle("Open Resource File");
         Shared.savePath= directoryChooser.showDialog(stage).getAbsolutePath();
         game.saveGameInterface(Shared.savePath);
+        root = FXMLLoader.load(getClass().getResource("/start.fxml"));
+        Scene scene = stage.getScene();
+        scene.setRoot(root);
 
     }
 }

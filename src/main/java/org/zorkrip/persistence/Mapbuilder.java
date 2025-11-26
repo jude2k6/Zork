@@ -2,6 +2,7 @@ package org.zorkrip.persistence;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.zorkrip.model.Candle;
 import org.zorkrip.model.Exit;
 import org.zorkrip.model.Item;
 import org.zorkrip.model.Room;
@@ -31,8 +32,10 @@ public class Mapbuilder {
             rooms.get("Outside").setExit("east", new Exit("east", rooms.get("Theatre"), true, "rusty-key"));
             rooms.get("Outside").setExit("south", new Exit("south", rooms.get("Lab")));
             rooms.get("Outside").setExit("west", new Exit("west", rooms.get("Pub")));
-            rooms.get("Outside").addItem(new Item("Bread", "yummy"));
-            rooms.get("Outside").addItem(new Item("rusty-key", "f67"));
+            rooms.get("Outside").addItem(new Candle("Candle","candle",true));
+
+            rooms.get("Outside").addItem(new Item("Bread", "yummy",false));
+            rooms.get("Outside").addItem(new Item("rusty-key", "f67",true));
 
 // Theatre
             rooms.get("Theatre").setExit("west", new Exit("west", rooms.get("Outside")));

@@ -1,21 +1,6 @@
 package org.zorkrip.engine;
 
-public class Command {
-    private final String commandWord;
-    private final String secondWord;
-
-    public Command(String firstWord, String secondWord) {
-        this.commandWord = firstWord;
-        this.secondWord = secondWord;
-    }
-
-    public String getCommandWord() {
-        return commandWord;
-    }
-
-    public String getSecondWord() {
-        return secondWord;
-    }
+public record Command(String commandWord, String secondWord) {
 
     public boolean isUnknown() {
         return commandWord == null;

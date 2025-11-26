@@ -1,6 +1,6 @@
 package org.zorkrip.ui.fx;
 
-import javafx.event.ActionEvent;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,6 +27,7 @@ public class StartController {
     }
 
     public void quit() {
+        Platform.exit();
     }
 
     public void credits() throws IOException {

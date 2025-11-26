@@ -12,13 +12,13 @@ import java.io.IOException;
 public class CreditsController {
 
 
-    public Button back;
+    public Button backButton;
 
-    public void back(ActionEvent actionEvent) throws IOException {
+    public void back() throws IOException {
 
         Stage stage;
         Parent root;
-        stage = (Stage) back.getScene().getWindow();
+        stage = (Stage) backButton.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("/start.fxml"));
 
         Scene scene = stage.getScene();  // reuse the existing scene

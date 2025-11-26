@@ -21,15 +21,20 @@ interface Inventory {
     }
 
 
-    default String printItems() {
+
+
+    default String printItems(Player player) {
         StringBuilder sb = new StringBuilder();
 
         if (getInventory().isEmpty()) {
             System.out.println();
-            return"";
+            return "";
         }
 
         for (int i = 0; i < getInventory().size(); i++) {
+            if (!getItemAtIndex(i).isVisible()) {
+                if (!player.isEnhancedSight()) continue;
+            }
             sb.append(getItemAtIndex(i).getName());
             if (i + 1 < getInventory().size()) {
                 sb.append(",");
@@ -55,7 +60,7 @@ interface Inventory {
 
         if (getInventory().isEmpty()) {
             System.out.println();
-            return"";
+            return "";
         }
 
         for (int i = 0; i < getInventory().size(); i++) {
@@ -68,14 +73,31 @@ interface Inventory {
         return sb.toString();
     }
 
-
-
-    default int getNumberItems() {
-        try {
-            return getInventory().toArray().length;
-        } catch (Exception e) {
-            return 0;
+    default Item getItem(String item) {
+        int index = getIndexOfItem(item);
+        if (index == -1) {
+            return null;
         }
+        return getItemAtIndex(index);
     }
+
+    default Item getVisableItem(String itemName, Player player) {
+        Item item = getItem(itemName);
+        if (item == null) {
+            return null;
+        }
+
+        if (!(item.isVisible())) {
+            if (player.isEnhancedSight()){
+                return item;
+            }
+            return null;
+        }
+        return item;
+
+    }
+
+
+
 
 }

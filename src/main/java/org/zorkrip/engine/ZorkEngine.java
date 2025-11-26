@@ -28,7 +28,7 @@ public class ZorkEngine implements GameEngine {
     private final Parser parser;
     private static Player player;
     private static Map<String, Room> rooms;
-    private boolean running;
+    private final boolean running;
 
 
     public ZorkEngine() {
@@ -66,10 +66,9 @@ public class ZorkEngine implements GameEngine {
     }
 
     @Override
-    public Void saveGameInterface(String path) {
+    public void saveGameInterface(String path) {
 
-        saveGame(rooms,player,path);
-        return null;
+        saveGame(rooms, player, path);
     }
 
     public String play(String s) {
@@ -87,42 +86,37 @@ public class ZorkEngine implements GameEngine {
                 "Welcome to the University adventure!\n" +
                 "Type 'help' if you need help." +
                 "\n" +
-                player.getCurrentRoom().getRoomDescription() + "\n";
+                player.getCurrentRoom().getRoomDescription(player) + "\n";
     }
 
     private String processCommand(Command command) {
-        String commandWord = command.getCommandWord();
+        String commandWord = command.commandWord();
 
         if (commandWord == null) {
             return "I don't understand your command...\n";
         }
 
-        switch (commandWord) {
-            case "help":
-                return printHelp();
+        return switch (commandWord) {
+            case "help" -> printHelp();
+            case "go" -> goRoom(command);
+            case "take" -> take(command);
+            case "drop" -> drop(command);
+            case "open" -> open(command);
+            case "use" -> use(command);
+            default -> "I don't know what you mean...";
+        };
 
-            case "go":
-                return goRoom(command);
-            case "take": {
-                return take(command);
+    }
 
-            }
-            case "drop": {
-                return drop(command);
-
-            }
-
-            case "open": {
-                return open(command);
-
-            }
-
-
-            default:
-                return "I don't know what you mean...";
-
+    private String use(Command command) {
+        String item = command.secondWord();
+        if (player.getItem(item) == null) {
+            return item + " is not in your Inventory";
         }
 
+        player.getItemAtIndex(player.getIndexOfItem(item)).use(player);
+        player.removeItem(player.getIndexOfItem(item));
+        return "";
     }
 
     private String printHelp() {
@@ -137,7 +131,7 @@ public class ZorkEngine implements GameEngine {
             return "Go where?+\n";
         }
 
-        String direction = command.getSecondWord();
+        String direction = command.secondWord();
 
         Exit exit = player.getCurrentRoom().getExit(direction);
 
@@ -148,7 +142,7 @@ public class ZorkEngine implements GameEngine {
             if (player.getCurrentRoom().getExit(direction).isLocked()) {
                 player.setCurrentRoom(nextRoom);
 
-                return player.getCurrentRoom().getRoomDescription();
+                return player.getCurrentRoom().getRoomDescription(player);
             } else {
                 return "door is locked" + "\n";
             }
@@ -164,17 +158,15 @@ public class ZorkEngine implements GameEngine {
 
         }
 
-        String item = command.getSecondWord();
+        String item = command.secondWord();
 
         Room room = player.getCurrentRoom();
-        for (int i = 0; i < room.getNumberItems(); i++) {
-            if (room.getItemAtIndex(i).getName().equalsIgnoreCase(item)) {
-                player.addItem(room.getItemAtIndex(i));
-                room.removeItem(i);
-                return "";
-            }
-        }
-        return "There is no" + command.getSecondWord() + "to take\n";
+
+        if (room.getVisableItem(item,player)==null){return "There is no " + item + " to take\n";}
+        player.addItem(room.getItem(item));
+        room.removeItem(room.getIndexOfItem(item));
+
+        return "";
     }
 
 
@@ -184,17 +176,15 @@ public class ZorkEngine implements GameEngine {
 
         }
 
-        String item = command.getSecondWord();
-
+        String item = command.secondWord();
         Room room = player.getCurrentRoom();
-        for (int i = 0; i < player.getNumberItems(); i++) {
-            if (player.getItemAtIndex(i).getName().equalsIgnoreCase(item)) {
-                room.addItem(player.getItemAtIndex(i));
-                player.removeItem(i);
 
-            }
+        if (player.getItem(item) == null ) {
+            return "There is no" + command.secondWord() + "to take\n";
         }
-        return "There is no" + command.getSecondWord() + "to drop\n";
+        room.addItem(player.getItem(item));
+        player.removeItem(player.getIndexOfItem(item));
+        return "";
     }
 
     private String open(Command command) {
@@ -202,7 +192,7 @@ public class ZorkEngine implements GameEngine {
             return "Open what\n";
 
         } else {
-            String target = command.getSecondWord();
+            String target = command.secondWord();
             Exit exit = player.getCurrentRoom().getExit(target);
             if (exit.isLocked()) {
                 return "Door is not locked\n";
@@ -210,13 +200,13 @@ public class ZorkEngine implements GameEngine {
                 exit.unlock();
                 player.removeItem(player.getIndexOfItem(exit.getKey()));
             } else {
-                return "You dont have the right key\n";
+                return "You don't have the right key\n";
             }
 
         }
 
 
-        return "There is no" + command.getSecondWord() + "to open\n";
+        return "There is no" + command.secondWord() + "to open\n";
     }
 
 

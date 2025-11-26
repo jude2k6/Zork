@@ -21,7 +21,7 @@ abstract class Character implements Serializable, Inventory {
     }
 
 
-    /// MOVMENT
+    /// MOVEMENT
     public Room getCurrentRoom() {
         return currentRoom;
     }
@@ -31,15 +31,6 @@ abstract class Character implements Serializable, Inventory {
         this.currentRoom = room;
     }
 
-    /*public void move(String direction) {
-        Room nextRoom = currentRoom.getExit(direction);
-        if (nextRoom != null) {
-            currentRoom = nextRoom;
-            System.out.println("You moved to: " + currentRoom.getDescription());
-        } else {
-            System.out.println("You can't go that way!");
-        }
-    }*/
 
 
     /// INVENTORY

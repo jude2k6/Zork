@@ -9,10 +9,10 @@ public  class Item implements Serializable {
     private int id;
     private boolean isVisible;
 
-    public Item(String name, String description) {
+    public Item(String name, String description,boolean isVisible) {
         this.name = name;
         this.description = description;
-        this.isVisible = true;
+        this.isVisible = isVisible;
     }
 
     public String getDescription() {
@@ -56,4 +56,7 @@ public  class Item implements Serializable {
     }
 
 
+    public void use(Player player) {
+
+    }
 }

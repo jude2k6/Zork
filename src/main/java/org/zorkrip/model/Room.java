@@ -3,6 +3,7 @@ package org.zorkrip.model;
 import java.io.Serializable;
 import java.util.*;
 
+
 public class Room implements Serializable, Inventory {
     private final String description;
     private final Map<String, Exit> exits; // Map direction to neighboring Room
@@ -39,10 +40,10 @@ public class Room implements Serializable, Inventory {
     }
 
 
-    public String getRoomDescription(){
+    public String getRoomDescription(Player player){
         return getLongDescription() +
                 "\n" +
-                "Items: " + printItems()+"\n";
+                "Items: " + printItems( player)+"\n";
     }
 
     public String getLongDescription() {
