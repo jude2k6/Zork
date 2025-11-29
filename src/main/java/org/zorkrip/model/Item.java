@@ -2,14 +2,14 @@ package org.zorkrip.model;
 
 import java.io.Serializable;
 
-public  class Item implements Serializable {
+public class Item implements Serializable {
     private String description;
     private String name;
     private String location;
     private int id;
     private boolean isVisible;
 
-    public Item(String name, String description,boolean isVisible) {
+    public Item(String name, String description, boolean isVisible) {
         this.name = name;
         this.description = description;
         this.isVisible = isVisible;

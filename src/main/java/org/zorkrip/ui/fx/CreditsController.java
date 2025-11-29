@@ -1,6 +1,5 @@
 package org.zorkrip.ui.fx;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,8 +22,6 @@ public class CreditsController {
 
         Scene scene = stage.getScene();  // reuse the existing scene
         scene.setRoot(root);
-
-
 
 
     }

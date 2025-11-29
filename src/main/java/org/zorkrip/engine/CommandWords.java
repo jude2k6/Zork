@@ -13,10 +13,11 @@ public class CommandWords {
         validCommands.put("help", "Show help");
         validCommands.put("look", "Look around");
         validCommands.put("eat", "Eat something");
-        validCommands.put("take","Pickup something");
-        validCommands.put("drop","Drop something");
-        validCommands.put("open","Opens door");
-        validCommands.put("use","Uses item");
+        validCommands.put("take", "Pickup something");
+        validCommands.put("drop", "Drop something");
+        validCommands.put("open", "Opens door");
+        validCommands.put("use", "Uses item");
+        validCommands.put("inspect","inspects item");
     }
 
     public boolean isCommand(String commandWord) {
@@ -31,5 +32,12 @@ public class CommandWords {
         }
         sb.append("\n");
         return sb.toString();
+    }
+
+    public String getCommandDescription(String command){
+        if (validCommands.containsKey(command)){
+            return validCommands.get(command) +"\n";
+        }
+        return null;
     }
 }

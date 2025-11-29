@@ -4,14 +4,13 @@ public class Candle extends Item {
 
 
     public Candle(String name, String description, boolean isVisable) {
-        super(name, description,isVisable);
+        super(name, description, isVisable);
     }
-
 
 
     @Override
     public void use(Player player) {
-        Thread thread = new Thread(new useCandle( player));
+        Thread thread = new Thread(new useCandle(player));
         thread.start();
     }
 
@@ -20,6 +19,7 @@ public class Candle extends Item {
 
 class useCandle implements Runnable {
     final Player player;
+
     public useCandle(Player player) {
         this.player = player;
 

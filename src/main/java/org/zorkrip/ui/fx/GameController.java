@@ -1,9 +1,7 @@
 package org.zorkrip.ui.fx;
 
 
-
 import javafx.fxml.FXML;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,12 +19,11 @@ import java.util.Objects;
 
 public class GameController {
 
+    final GameEngine game;
     public TextArea console;
     public AnchorPane rootPane;
     public TextArea inventory;
     public Button quitButton;
-    final GameEngine game;
-
     public String inventoryString;
 
 
@@ -56,7 +53,7 @@ public class GameController {
 
         String command = userInput.getText();
         String s = game.handleInput(command);
-        console.appendText(">"+command+"\n");
+        console.appendText(">" + command + "\n");
         console.appendText(s);
         userInput.clear();
         updateInventory(inventoryString);
@@ -64,11 +61,11 @@ public class GameController {
     }
 
     public void updateInventory(String inventoryString) {
-            if(!Objects.equals(inventoryString, game.viewInventory())){
-                inventoryString= game.viewInventory();
-                inventory.clear();
-                inventory.setText(inventoryString);
-            }
+        if (!Objects.equals(inventoryString, game.viewInventory())) {
+            inventoryString = game.viewInventory();
+            inventory.clear();
+            inventory.setText(inventoryString);
+        }
 
     }
 
@@ -80,9 +77,9 @@ public class GameController {
         stage = (Stage) quitButton.getScene().getWindow();
 
 
-        DirectoryChooser directoryChooser= new DirectoryChooser();
+        DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Open Resource File");
-        Shared.savePath= directoryChooser.showDialog(stage).getAbsolutePath();
+        Shared.savePath = directoryChooser.showDialog(stage).getAbsolutePath();
         game.saveGameInterface(Shared.savePath);
         root = FXMLLoader.load(getClass().getResource("/start.fxml"));
         Scene scene = stage.getScene();

@@ -2,6 +2,7 @@
   "Outside": {
     "description": "outside the main entrance of the university",
     "items": [],
+    "npcs": [],
     "exits": {}
   },
   "Theatre": {

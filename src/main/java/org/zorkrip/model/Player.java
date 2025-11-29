@@ -4,7 +4,7 @@ package org.zorkrip.model;
 public class Player extends Character {
     private boolean enhancedSight;
 
-    public Player(String name, Room startingRoom){
+    public Player(String name, Room startingRoom) {
         super(name, startingRoom);
 
     }

@@ -32,7 +32,6 @@ abstract class Character implements Serializable, Inventory {
     }
 
 
-
     /// INVENTORY
 
     @Override
@@ -40,7 +39,6 @@ abstract class Character implements Serializable, Inventory {
         if (inventory == null) inventory = new ArrayList<>();
         return inventory;
     }
-
 
 
 }

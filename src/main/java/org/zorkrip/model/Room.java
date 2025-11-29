@@ -1,18 +1,24 @@
 package org.zorkrip.model;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class Room implements Serializable, Inventory {
     private final String description;
     private final Map<String, Exit> exits; // Map direction to neighboring Room
     private ArrayList<Item> inventory;
+    private ArrayList<Npc> npcs;
 
     public Room(String description) {
 
+
         exits = new LinkedHashMap<>();
         inventory = new ArrayList<>();
+        npcs = new ArrayList<>();
         this.description = description;
 
     }
@@ -26,9 +32,31 @@ public class Room implements Serializable, Inventory {
     }
 
 
-
     public Exit getExit(String direction) {
         return exits.get(direction);
+    }
+
+    public void addNpc(Npc npc) {
+        npcs.add(npc);
+    }
+
+    public Npc getNpc(String npcName) {
+        for (Npc npc : npcs) {
+            if (npc.getName().equalsIgnoreCase(npcName)) {
+                return npc;
+            }
+        }
+        return null;
+    }
+
+    public String getNpcs() {
+        StringBuilder sb = new StringBuilder();
+        if(npcs == null){return "";}
+        for (Npc npc: npcs){
+            sb.append(npc.getName()).append(" ");
+        }
+
+        return sb.toString();
     }
 
     public String getExitString() {
@@ -40,10 +68,10 @@ public class Room implements Serializable, Inventory {
     }
 
 
-    public String getRoomDescription(Player player){
+    public String getRoomDescription(Player player) {
         return getLongDescription() +
                 "\n" +
-                "Items: " + printItems( player)+"\n";
+                "Items: " + printItems(player) + "\n";
     }
 
     public String getLongDescription() {

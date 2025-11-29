@@ -2,21 +2,24 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/17.0.12" fx:controller="org.zorkrip.ui.fx.GameController">
 
-<AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.zorkrip.ui.fx.GameController">
 
-
-
-    <TextArea fx:id="inventory" editable="false" style="-fx-font-family: 'Consolas'; -fx-font-size: 14;" wrapText="true" AnchorPane.bottomAnchor="60" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="510" AnchorPane.topAnchor="10" />
+    <TextArea fx:id="inventory" editable="false" style="-fx-font-family: 'Consolas'; -fx-font-size: 14;" wrapText="true"
+              AnchorPane.bottomAnchor="60" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="510"
+              AnchorPane.topAnchor="10"/>
     <!-- console -->
-    <TextArea fx:id="console" editable="false" style="-fx-font-family: 'Consolas'; -fx-font-size: 14;" wrapText="true" AnchorPane.bottomAnchor="60" AnchorPane.leftAnchor="100" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10" />
+    <TextArea fx:id="console" editable="false" style="-fx-font-family: 'Consolas'; -fx-font-size: 14;" wrapText="true"
+              AnchorPane.bottomAnchor="60" AnchorPane.leftAnchor="100" AnchorPane.rightAnchor="10"
+              AnchorPane.topAnchor="10"/>
 
     <!-- input -->
     <HBox spacing="10" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
-        <Button fx:id="quitButton" minWidth="80" onAction="#quitGame" text="Quit" />
-        <TextField fx:id="userInput" promptText="Enter command..." HBox.hgrow="ALWAYS" />
+        <Button fx:id="quitButton" minWidth="80" onAction="#quitGame" text="Quit"/>
+        <TextField fx:id="userInput" promptText="Enter command..." HBox.hgrow="ALWAYS"/>
 
-        <Button fx:id="enterButton" minWidth="80" onAction="#enterCommand" text="Enter" />
+        <Button fx:id="enterButton" minWidth="80" onAction="#enterCommand" text="Enter"/>
     </HBox>
 
 

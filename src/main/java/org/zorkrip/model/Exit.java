@@ -30,9 +30,11 @@ public class Exit implements Serializable {
         return !locked;
     }
 
-    public String getKey(){return key;}
+    public String getKey() {
+        return key;
+    }
 
-    public void unlock(){
+    public void unlock() {
         locked = false;
     }
 }

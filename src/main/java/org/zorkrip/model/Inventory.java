@@ -21,8 +21,6 @@ interface Inventory {
     }
 
 
-
-
     default String printItems(Player player) {
         StringBuilder sb = new StringBuilder();
 
@@ -88,7 +86,7 @@ interface Inventory {
         }
 
         if (!(item.isVisible())) {
-            if (player.isEnhancedSight()){
+            if (player.isEnhancedSight()) {
                 return item;
             }
             return null;
@@ -96,8 +94,6 @@ interface Inventory {
         return item;
 
     }
-
-
 
 
 }

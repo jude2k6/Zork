@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class LoadController {
@@ -31,17 +32,15 @@ public class LoadController {
         stage = (Stage) back.getScene().getWindow();
 
 
-        DirectoryChooser  directoryChooser= new DirectoryChooser();
+        DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Open Resource File");
-        Shared.loadPath= directoryChooser.showDialog(stage).getAbsolutePath();
+        Shared.loadPath = directoryChooser.showDialog(stage).getAbsolutePath();
 
 
         root = FXMLLoader.load(getClass().getResource("/game.fxml"));
 
         Scene scene = stage.getScene();  // reuse the existing scene
         scene.setRoot(root);
-
-
 
 
     }

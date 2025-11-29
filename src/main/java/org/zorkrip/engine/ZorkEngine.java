@@ -15,6 +15,7 @@ emphasizing exploration and simple command-driven gameplay
 */
 
 import org.zorkrip.model.Exit;
+import org.zorkrip.model.Npc;
 import org.zorkrip.model.Player;
 import org.zorkrip.model.Room;
 import org.zorkrip.persistence.LoadCharacter;
@@ -25,9 +26,9 @@ import java.util.Map;
 import static org.zorkrip.persistence.Save.saveGame;
 
 public class ZorkEngine implements GameEngine {
-    private final Parser parser;
     private static Player player;
     private static Map<String, Room> rooms;
+    private final Parser parser;
     private final boolean running;
 
 
@@ -90,22 +91,47 @@ public class ZorkEngine implements GameEngine {
     }
 
     private String processCommand(Command command) {
+
         String commandWord = command.commandWord();
 
-        if (commandWord == null) {
-            return "I don't understand your command...\n";
-        }
+
 
         return switch (commandWord) {
-            case "help" -> printHelp();
-            case "go" -> goRoom(command);
-            case "take" -> take(command);
+            case "help"  -> printHelp(command);
+            case "go" , "move" -> goRoom(command);
+            case "take","pick-up" -> take(command);
             case "drop" -> drop(command);
             case "open" -> open(command);
-            case "use" -> use(command);
-            default -> "I don't know what you mean...";
+            case "use","eat" -> use(command);
+            case "inspect" -> inspect(command);
+            case "talk"-> talk(command);
+            default -> "I don't know what you mean...\n";
         };
+    }
 
+    private String talk(Command command) {
+        if (!command.hasSecondWord()) {
+            return "Talk to who\n";
+        }
+        Npc npc = player.getCurrentRoom().getNpc(command.secondWord());
+        if(npc == null){
+            return "There is no " + command.secondWord() + " to talk to";
+        }
+        return npc.talk(player);
+
+    }
+
+    private String inspect(Command command) {
+        if (!command.hasSecondWord()) {
+            return "Inspect what what\n";
+        }
+
+        String item = command.secondWord();
+        if (player.getItem(item) == null) {
+            return "There is no" + command.secondWord() + "to inspect\n";
+        }
+
+        return item + ": " + player.getItem(item).getDescription();
     }
 
     private String use(Command command) {
@@ -119,7 +145,17 @@ public class ZorkEngine implements GameEngine {
         return "";
     }
 
-    private String printHelp() {
+    private String printHelp(Command command) {
+        if (command.hasSecondWord()) {
+            String commandDescription = parser.getCommandDescription(command.secondWord());
+            if (commandDescription == null) {
+                return command.secondWord() + " is not a command";
+            }
+            return commandDescription;
+
+        }
+
+
         return "You are lost. You are alone. You wander around the university.\n" +
                 "Your command words are: " +
                 parser.showCommands() + "\n";
@@ -132,7 +168,6 @@ public class ZorkEngine implements GameEngine {
         }
 
         String direction = command.secondWord();
-
         Exit exit = player.getCurrentRoom().getExit(direction);
 
         if (exit == null) {
@@ -142,7 +177,7 @@ public class ZorkEngine implements GameEngine {
             if (player.getCurrentRoom().getExit(direction).isLocked()) {
                 player.setCurrentRoom(nextRoom);
 
-                return player.getCurrentRoom().getRoomDescription(player);
+                return player.getCurrentRoom().getRoomDescription(player)+"\n" + player.getCurrentRoom().getNpcs();
             } else {
                 return "door is locked" + "\n";
             }
@@ -159,10 +194,11 @@ public class ZorkEngine implements GameEngine {
         }
 
         String item = command.secondWord();
-
         Room room = player.getCurrentRoom();
 
-        if (room.getVisableItem(item,player)==null){return "There is no " + item + " to take\n";}
+        if (room.getVisableItem(item, player) == null) {
+            return "There is no " + item + " to take\n";
+        }
         player.addItem(room.getItem(item));
         room.removeItem(room.getIndexOfItem(item));
 
@@ -179,7 +215,7 @@ public class ZorkEngine implements GameEngine {
         String item = command.secondWord();
         Room room = player.getCurrentRoom();
 
-        if (player.getItem(item) == null ) {
+        if (player.getItem(item) == null) {
             return "There is no" + command.secondWord() + "to take\n";
         }
         room.addItem(player.getItem(item));

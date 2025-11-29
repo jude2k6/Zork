@@ -1,4 +1,5 @@
 package org.zorkrip.persistence;
+
 import org.zorkrip.model.Room;
 
 import java.io.*;
@@ -27,18 +28,15 @@ public class Loadmap {
     }
 
 
+    public static Map<String, Room> loadmap(String path) {
+        System.out.println(path + File.separator + "map.ser");
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(path + File.separator + "map.ser"))) {
 
-
-
-    public static Map<String,Room> loadmap(String path) {
-        System.out.println(path +File.separator+"map.ser");
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(path +File.separator+"map.ser"))) {
-
-            return (Map<String,Room>) in.readObject();
+            return (Map<String, Room>) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return null;
     }
-    }
+}
 
