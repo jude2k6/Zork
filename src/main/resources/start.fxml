@@ -15,6 +15,7 @@
 
         <Button text="Start" fx:id="start" onAction="#play" prefWidth="200"/>
         <Button text="Credits" fx:id="credits" onAction="#credits" prefWidth="200"/>
+        <Button text="Settings" fx:id="settings" onAction="#settings" prefWidth="200"/>
         <Button text="Quit" fx:id="quit" onAction="#quit" prefWidth="200"/>
 
     </VBox>

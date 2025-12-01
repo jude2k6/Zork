@@ -1,0 +1,84 @@
+/* Root */
+.root {
+    -fx-background-color: #0f0f0f; /* dark gray */
+    -fx-padding: 20;
+}
+
+/* Labels */
+.label {
+    -fx-text-fill: #c0ffc0; /* soft green */
+    -fx-font-family: "Consolas", "Monaco", "Courier New";
+}
+
+.label.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.label.subtitle {
+    -fx-font-size: 16px;
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: #c0ffc0;
+    -fx-border-color: #444;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 6 12 6 12;
+    -fx-font-family: "Consolas";
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #2c2c2c;
+}
+
+/* Inventory and console */
+#inventory, #console {
+    -fx-control-inner-background: #0a0a0a;
+    -fx-text-fill: #00ff66;
+    -fx-font-family: "Consolas", "Monaco", "Courier New";
+    -fx-font-size: 14px;
+    -fx-border-color: #006600;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+#inventory {
+    -fx-pref-width: 200px;
+    -fx-min-width: 180px;
+}
+
+#console {
+    -fx-pref-width: 370px;
+    -fx-min-width: 300px;
+}
+
+/* TextField */
+.text-field {
+    -fx-background-color: #0a0a0a;
+    -fx-text-fill: #00ff66;
+    -fx-border-color: #006600;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+/* Sliders */
+.slider .track {
+    -fx-background-color: #333;
+    -fx-background-radius: 4;
+}
+
+.slider .thumb {
+    -fx-background-color: #00cc44;
+    -fx-background-radius: 6;
+}
+
+/* HBox spacing */
+.hbox {
+    -fx-spacing: 10;
+    -fx-alignment: center;
+}

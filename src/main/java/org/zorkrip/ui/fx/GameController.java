@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -15,21 +16,25 @@ import org.zorkrip.engine.GameEngine;
 import org.zorkrip.engine.ZorkEngine;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class GameController {
 
     final GameEngine game;
+
+    @FXML
     public TextArea console;
     public AnchorPane rootPane;
     public TextArea inventory;
     public Button quitButton;
     public String inventoryString;
-
-
-    @FXML
     public TextField userInput;
     public Button enterButton;
+
+
+    public ArrayList<String> commandHistory;
+    public int commandIndex;
 
     public GameController() {
         if (!(Shared.loadPath == null)) {
@@ -38,7 +43,7 @@ public class GameController {
             game = new ZorkEngine();
 
         }
-
+        commandHistory = new ArrayList<>();
     }
 
     public void initialize() {
@@ -46,6 +51,26 @@ public class GameController {
 
         userInput.setOnAction(e -> enterCommand());
         updateInventory(inventoryString);
+
+        userInput.setOnKeyPressed(event -> {
+            if (commandHistory.isEmpty()) return;
+
+            if (event.getCode() == KeyCode.UP) {
+                commandIndex = Math.max(0, commandIndex - 1);
+                userInput.setText(commandHistory.get(commandIndex));
+                event.consume();
+
+            }
+            if (event.getCode() == KeyCode.DOWN) {
+
+                commandIndex = Math.min(commandHistory.size() - 1, commandIndex + 1);
+                userInput.setText(commandHistory.get(commandIndex));
+                event.consume();
+            }
+
+
+        });
+
     }
 
 
@@ -55,8 +80,11 @@ public class GameController {
         String s = game.handleInput(command);
         console.appendText(">" + command + "\n");
         console.appendText(s);
+        commandHistory.add(command);
+        commandIndex = commandHistory.size() - 1;
         userInput.clear();
         updateInventory(inventoryString);
+
 
     }
 

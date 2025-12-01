@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class CreditsController {
 
@@ -18,7 +19,7 @@ public class CreditsController {
         Stage stage;
         Parent root;
         stage = (Stage) backButton.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("/start.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/start.fxml")));
 
         Scene scene = stage.getScene();  // reuse the existing scene
         scene.setRoot(root);

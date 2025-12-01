@@ -19,14 +19,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        new BackgroundMusic().init();
         Parent root = FXMLLoader.load(getClass().getResource("/start.fxml"));
-
+        Scene scene= new  Scene(root, 600, 400);
 
         primaryStage.setTitle("Zork-Rip");
 
 
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(scene);
+        scene.getStylesheets().add(getClass().getResource("/dark.css").toExternalForm());
         primaryStage.show();
 
     }
+
 }
