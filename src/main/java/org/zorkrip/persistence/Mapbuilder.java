@@ -2,11 +2,11 @@ package org.zorkrip.persistence;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import javafx.concurrent.Worker;
 import org.zorkrip.model.*;
 
 import java.io.*;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Map;
 
 
@@ -25,37 +25,128 @@ public class Mapbuilder {
             }.getType();
             Map<String, Room> rooms = gson.fromJson(reader, type);
 
+            /// npcs
+            //husband
+            Npc husband = new Npc("Deshevilded-Husband", rooms.get("Menswear-Sanctuary"), new Quest("Sunglasses", new Item("Blue-medium-hoody", "A soft blue hoody labeled 'Medium-ish'.\n Smells faintly of deodorant samples and existential dread.", true, true)));
+            String husbandIntro = "The man looks up at you with exhausted eyes.\n"
+                    + "\"Mate… I can’t even look at the fluorescent lights right now.\"\n"
+                    + "\"If you find any thing to help in this cursed place,bring it me.\"\n"
+                    + "\"Then I’ll help you with whatever you're after.\"";
+            String husbandTrade = "He grabs the sunglasses like they’re holy relics.\n"
+                    + "\"Oh thank god… I can finally open my eyes again.\"\n"
+                    + "He puts them on, sighs deeply, then hands you the hoody.\n"
+                    + "\"Here. Take it. And may the retail gods guide you.\"";
 
-            // Outside
-            rooms.get("Outside").setExit("east", new Exit("east", rooms.get("Theatre"), true, "rusty-key"));
-            rooms.get("Outside").setExit("south", new Exit("south", rooms.get("Lab")));
-            rooms.get("Outside").setExit("west", new Exit("west", rooms.get("Pub")));
-            rooms.get("Outside").addItem(new Candle("Candle", "candle", true));
+            String[] husbandAfter = {
+                    "He adjusts his sunglasses. \"I'm staying here until my wife finds me—or the store collapses. Whichever comes first.\"",
+                    "He nods at you. \"These sunglasses are the only thing keeping me alive in this lighting.\"",
+                    "He sits back against the wall. \"If you see my wife, tell her I made it to Homewear. That should buy me ten minutes.\"",
+                    "He waves lazily. \"Go on, hero. Escape while you still can.\"",
+                    "\"Don't worry about me,\" he says, lying clearly worried about himself.",
+                    "\"If I don't make it out, tell my kids I fought bravely against the slipper pile.\""
+            };
 
-            rooms.get("Outside").addItem(new Item("Bread", "yummy", false));
-            rooms.get("Outside").addItem(new Item("rusty-key", "f67", true));
+            String[] dialogue = new String[]{husbandIntro};
+            husband.addDialogue(DialogueCondition.DEFAULT, dialogue);
+            dialogue = new String[]{husbandTrade};
+            husband.addDialogue(DialogueCondition.RETURNINGITEM, dialogue);
+            husband.addDialogue(DialogueCondition.QUESTFINISHED, husbandAfter);
 
-            rooms.get("Outside").addNpc(new Npc("Bob",rooms.get("Outside"),new Quest("Bread",new Item("rusty-key", "f67", true))));
+            Npc cashier = new Cashier("Mary-Walsh", rooms.get("Cashiers"));
+            WorkerNpc worker = new WorkerNpc("Sales-assistant",rooms.get("Homewear-valley"));
 
-            String[] lines = {"i need bread"};
-            rooms.get("Outside").getNpc("Bob").addDialogue(DialogueCondition.DEFAULT,lines);
-            String[] lines1 = {"Thanks for the bread"};
-            rooms.get("Outside").getNpc("Bob").addDialogue(DialogueCondition.RETURNINGITEM,lines1);
-            String[] lines2 = {"we are friends"};
-            rooms.get("Outside").getNpc("Bob").addDialogue(DialogueCondition.QUESTFINISHED,lines2);
 
-// Theatre
-            rooms.get("Theatre").setExit("west", new Exit("west", rooms.get("Outside")));
 
-// Pub
-            rooms.get("Pub").setExit("east", new Exit("east", rooms.get("Outside")));
 
-// Lab
-            rooms.get("Lab").setExit("north", new Exit("north", rooms.get("Outside")));
-            rooms.get("Lab").setExit("east", new Exit("east", rooms.get("Office")));
 
-// Office
-            rooms.get("Office").setExit("west", new Exit("west", rooms.get("Lab")));
+
+            // Changingrooms
+            rooms.get("Changing-Rooms").setExit("east", new Exit("west", rooms.get("Lingerie-Labyrinth"), true));
+            rooms.get("Changing-Rooms").setExit("south", new Exit("south", rooms.get("Menswear-Sanctuary"), true));
+
+
+            // menswear
+            rooms.get("Menswear-Sanctuary").setExit("north", new Exit("north", rooms.get("Changing-Rooms"), true));
+            rooms.get("Menswear-Sanctuary").setExit("east", new Exit("east", rooms.get("Womenswear"), true));
+            rooms.get("Menswear-Sanctuary").addNpc(husband);
+
+
+            //Lingerie-Labyrinth
+            rooms.get("Lingerie-Labyrinth").setExit("north", new Exit("north", rooms.get("Storeroom"), false, true, "keycard"));
+            rooms.get("Lingerie-Labyrinth").setExit("east", new Exit("east", rooms.get("€3-Sock-Bin"), false));
+            rooms.get("Lingerie-Labyrinth").setExit("south", new Exit("south", rooms.get("Womenswear"), false));
+            rooms.get("Lingerie-Labyrinth").setExit("west", new Exit("west", rooms.get("Changing-Rooms"), false));
+            rooms.get("Lingerie-Labyrinth").addNpc(new DerbhlaDoyle(rooms.get("Lingerie-Labyrinth")));
+
+
+            //Storeroom
+            rooms.get("Storeroom").setExit("south", new Exit("south", rooms.get("Lingerie-Labyrinth"), false));
+            rooms.get("Storeroom").addItem(new Item("Fluffy-slippers","\"Soft pair of slippers with slightly worn soles.\"\n",true,true));
+
+
+            // Womanswear
+            rooms.get("Womenswear").setExit("north", new Exit("north", rooms.get("Lingerie-Labyrinth"), true));
+            rooms.get("Womenswear").setExit("east", new Exit("east", rooms.get("Baby-Section-Maze"), true));
+            rooms.get("Womenswear").setExit("south", new Exit("south", rooms.get("Candle-Grotto"), true));
+            rooms.get("Womenswear").setExit("west", new Exit("west", rooms.get("Menswear-Sanctuary"), true));
+
+            // candle grotto
+            rooms.get("Candle-Grotto").setExit("north", new Exit("north", rooms.get("Womenswear"), true));
+            rooms.get("Candle-Grotto").setExit("south", new Exit("south", rooms.get("Homewear-valley"), true));
+            rooms.get("Candle-Grotto").addItem(new Candle("Forest-Regret-candle", "A candle labeled 'Forest Regret'. It smells like pine, moss, and every bad decision you've made on a Sunday evening.", true));
+            rooms.get("Candle-Grotto").addItem(new Candle(
+                    "Laundry-Day-Delusion-candle",
+                    "A candle that smells like freshly folded laundry and the lie you tell yourself about 'keeping on top of things'.",
+                    true));
+            rooms.get("Candle-Grotto").addItem(new Candle(
+                    "Midnight-Tesco-Run-candle",
+                    "A candle with the unsettling scent of fluorescent aisles, reduced stickers, and questionable life choices.",
+                    true));
+            rooms.get("Candle-Grotto").addItem(new Candle(
+                    "Retail-Trauma-candle",
+                    "Not scented. Just smells like working a closing shift and wondering where your life went wrong.",
+                    true));
+
+
+            // Homewear
+            rooms.get("Homewear-valley").setExit("north", new Exit("north", rooms.get("Candle-Grotto"), true));
+            rooms.get("Homewear-valley").setExit("east", new Exit("east", rooms.get("Cashiers"), true));
+            rooms.get("Homewear-valley").setExit("south", new Exit("south", rooms.get("Shoe-Swamplands"), true));
+            rooms.get("Homewear-valley").addItem(new Mannequin("Mannequin",""
+            ));
+            rooms.get("Homewear-valley").addNpc(worker);
+
+            //shoe
+            rooms.get("Shoe-Swamplands").setExit("north", new Exit("north", rooms.get("Homewear-valley"), true));
+            rooms.get("Shoe-Swamplands").setExit("south", new Exit("south", rooms.get("Exits"), true));
+            rooms.get("Shoe-Swamplands").addItem(new Item("Sunglasses", "A cheap pair of plastic sunglasses. Slightly crooked, but good enough to survive Pennys lighting.", false, true));
+
+            //exits
+            rooms.get("Exits").setExit("north", new Exit("north", rooms.get("Shoe-Swamplands"), true));
+            rooms.get("Exits").setExit("east", new Exit("east", rooms.get("Outside"), true));
+            rooms.get("Exits").setExit("west", new Exit("west", rooms.get("Menswear-Sanctuary"), true));
+
+            //sockpit
+            rooms.get("€3-Sock-Bin").setExit("south", new Exit("south", rooms.get("Baby-Section-Maze"), true));
+            rooms.get("€3-Sock-Bin").setExit("west", new Exit("west", rooms.get("Lingerie-Labyrinth"), true));
+
+            //baby
+            rooms.get("Baby-Section-Maze").setExit("north", new Exit("north", rooms.get("€3-Sock-Bin"), true));
+            rooms.get("Baby-Section-Maze").setExit("south", new Exit("south", rooms.get("Cashiers"), true));
+            rooms.get("Baby-Section-Maze").setExit("west", new Exit("west", rooms.get("Womenswear"), true));
+            rooms.get("Baby-Section-Maze").addItem(new PushableItem("Pram","",new Item("Baby-bib","A small baby bib with a worn-out giraffe design."
+            ,true,true)));
+
+            //till
+            rooms.get("Cashiers").setExit("north", new Exit("north", rooms.get("Baby-Section-Maze"), true));
+            rooms.get("Cashiers").setExit("west", new Exit("west", rooms.get("Homewear-valley"), true));
+            rooms.get("Cashiers").addNpc(cashier);
+
+
+            //outside
+            rooms.get("Outside").setExit("west", new Exit("west", rooms.get("Exits"), true));
+
+
             Serialize.serialiseRoom(rooms);
         } catch (Exception e) {
             System.out.println("shits broken");

@@ -3,15 +3,19 @@ package org.zorkrip.model;
 import java.io.Serializable;
 
 public class Item implements Serializable {
+    private boolean pushable;
+    public boolean push;
     private String description;
     private String name;
     private String location;
     private int id;
     private boolean isVisible;
+    private boolean isCollectable;
 
-    public Item(String name, String description, boolean isVisible) {
+    public Item(String name, String description, boolean isVisible,boolean isCollectable) {
         this.name = name;
         this.description = description;
+        this.isCollectable = isCollectable;
         this.isVisible = isVisible;
     }
 
@@ -56,7 +60,27 @@ public class Item implements Serializable {
     }
 
 
-    public void use(Player player) {
+    public String use(Player player) {
 
+        return null;
     }
+
+    public boolean isCollectable() {
+        return isCollectable;
+    }
+    public void setCollectable(boolean b) {
+         isCollectable = b;
+    }
+
+
+
+
+    public boolean isPushable() {
+        return pushable;
+    }
+
+    public void setPushable(boolean pushable) {
+        this.pushable = pushable;
+    }
+
 }

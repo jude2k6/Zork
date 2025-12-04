@@ -22,7 +22,6 @@ public class Npc extends Character {
 
 
     public void addDialogue(DialogueCondition access, String[] lines) {
-
         dialogue.put(access, lines);
 
     }

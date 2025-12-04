@@ -2,21 +2,25 @@
 .root {
     -fx-background-color: #0f0f0f; /* dark gray */
     -fx-padding: 20;
+
+    /* master font scaling variable, to be updated in controller */
+    -fx-font-scale: 1;
 }
 
 /* Labels */
 .label {
     -fx-text-fill: #c0ffc0; /* soft green */
     -fx-font-family: "Consolas", "Monaco", "Courier New";
+    -fx-font-size: 14px; /* base size, scaled via controller */
 }
 
 .label.title {
-    -fx-font-size: 24px;
     -fx-font-weight: bold;
+    -fx-font-size: 24px; /* scaled via controller */
 }
 
 .label.subtitle {
-    -fx-font-size: 16px;
+    -fx-font-size: 16px; /* scaled via controller */
 }
 
 /* Buttons */
@@ -26,9 +30,9 @@
     -fx-border-color: #444;
     -fx-border-radius: 4;
     -fx-background-radius: 4;
-    -fx-padding: 6 12 6 12;
+    -fx-padding: 6 12;
     -fx-font-family: "Consolas";
-    -fx-font-size: 14px;
+    -fx-font-size: 14px; /* base size */
     -fx-cursor: hand;
 }
 
@@ -41,20 +45,21 @@
     -fx-control-inner-background: #0a0a0a;
     -fx-text-fill: #00ff66;
     -fx-font-family: "Consolas", "Monaco", "Courier New";
-    -fx-font-size: 14px;
+    -fx-font-size: 14px; /* base size, scaled in controller */
     -fx-border-color: #006600;
     -fx-border-radius: 4;
     -fx-background-radius: 4;
 }
 
+/* Make widths relative */
 #inventory {
-    -fx-pref-width: 200px;
-    -fx-min-width: 180px;
+    -fx-pref-width: 20em;
+    -fx-min-width: 15em;
 }
 
 #console {
-    -fx-pref-width: 370px;
-    -fx-min-width: 300px;
+    -fx-pref-width: 35em;
+    -fx-min-width: 25em;
 }
 
 /* TextField */
@@ -64,6 +69,7 @@
     -fx-border-color: #006600;
     -fx-border-radius: 4;
     -fx-background-radius: 4;
+    -fx-font-size: 14px; /* base size */
 }
 
 /* Sliders */

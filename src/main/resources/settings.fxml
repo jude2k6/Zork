@@ -3,34 +3,45 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.zorkrip.ui.fx.SettingsController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:id="root"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            fx:controller="org.zorkrip.ui.fx.SettingsController">
 
-    <VBox alignment="CENTER" spacing="20" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+    <VBox alignment="CENTER" spacing="15"
+          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+          style="-fx-padding: 20;">
 
-        <!-- MASTER VOLUME -->
+        <!-- Master Volume -->
         <HBox alignment="CENTER" spacing="10">
-            <Label text="Master volume" />
-            <Slider fx:id="masterVolumeSlider" prefWidth="200" />
+            <Label text="Master volume"/>
+            <Slider fx:id="masterVolumeSlider" prefWidth="200" HBox.hgrow="NEVER"/>
         </HBox>
 
-        <!-- MUSIC VOLUME -->
+        <!-- Music Volume -->
         <HBox alignment="CENTER" spacing="10">
-            <Label text="Music volume" />
-            <Slider fx:id="musicVolumeSlider" prefWidth="200" />
+            <Label text="Music volume"/>
+            <Slider fx:id="musicVolumeSlider" prefWidth="200" HBox.hgrow="NEVER"/>
         </HBox>
 
-        <!-- SFX VOLUME -->
+        <!-- SFX Volume -->
         <HBox alignment="CENTER" spacing="10">
-            <Label text="SFX volume" />
-            <Slider fx:id="sfxVolumeSlider" prefWidth="200" />
+            <Label text="SFX volume"/>
+            <Slider fx:id="sfxVolumeSlider" prefWidth="200" HBox.hgrow="NEVER"/>
         </HBox>
+
+        <!-- Theme -->
         <HBox alignment="CENTER" spacing="10">
-            <Label text="Theme" />
-            <RadioButton fx:id="theme" prefWidth="200" />
+            <Label text="Theme"/>
+            <RadioButton fx:id="theme"/>
         </HBox>
-        <!-- APPLY BUTTON -->
-        <Button fx:id="applyButton" onAction="#apply" prefWidth="200" text="Apply" />
-        <Button fx:id="backButton" onAction="#back" prefHeight="30" prefWidth="120" text="Back" />
+
+        <!-- Buttons -->
+        <HBox alignment="CENTER" spacing="15">
+            <Button fx:id="applyButton" onAction="#apply" text="Apply" prefWidth="100"/>
+            <Button fx:id="backButton" onAction="#back" text="Back" prefWidth="100"/>
+        </HBox>
 
     </VBox>
 

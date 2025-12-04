@@ -4,6 +4,8 @@ module zorkrip {
     requires java.desktop;
     requires javafx.media;
     requires javafx.graphics;
+    requires com.google.gson;
+    requires javafx.base;
 
     exports org.zorkrip.model;
     exports org.zorkrip.engine;

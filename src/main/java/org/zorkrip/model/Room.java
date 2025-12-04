@@ -8,12 +8,14 @@ import java.util.Map;
 
 
 public class Room implements Serializable, Inventory {
+    private String name;
     private final String description;
     private final Map<String, Exit> exits; // Map direction to neighboring Room
     private ArrayList<Item> inventory;
     private ArrayList<Npc> npcs;
 
-    public Room(String description) {
+
+    public Room(String description,String name) {
 
 
         exits = new LinkedHashMap<>();
@@ -37,8 +39,12 @@ public class Room implements Serializable, Inventory {
     }
 
     public void addNpc(Npc npc) {
+        if (npcs == null) {
+            npcs = new ArrayList<>();
+        }
         npcs.add(npc);
     }
+
 
     public Npc getNpc(String npcName) {
         for (Npc npc : npcs) {
@@ -51,8 +57,10 @@ public class Room implements Serializable, Inventory {
 
     public String getNpcs() {
         StringBuilder sb = new StringBuilder();
-        if(npcs == null){return "";}
-        for (Npc npc: npcs){
+        if (npcs == null) {
+            return "";
+        }
+        for (Npc npc : npcs) {
             sb.append(npc.getName()).append(" ");
         }
 
@@ -62,7 +70,10 @@ public class Room implements Serializable, Inventory {
     public String getExitString() {
         StringBuilder sb = new StringBuilder();
         for (String direction : exits.keySet()) {
-            sb.append(direction).append(" ");
+            if (exits.get(direction).isVisible()) {
+                sb.append(direction).append(" ");
+            }
+
         }
         return sb.toString().trim();
     }
@@ -71,11 +82,11 @@ public class Room implements Serializable, Inventory {
     public String getRoomDescription(Player player) {
         return getLongDescription() +
                 "\n" +
-                "Items: " + printItems(player) + "\n";
+                "Items: " + printItems(player) + "\n" +"Npcs: " + player.getCurrentRoom().getNpcs() +"\n\n";
     }
 
     public String getLongDescription() {
-        return "You are " + description + ".\nExits: " + getExitString();
+        return    description + ".\nExits: " + getExitString();
     }
 
 
@@ -86,5 +97,8 @@ public class Room implements Serializable, Inventory {
     }
 
 
+    public String getName() {
+        return name;
+    }
 }
 

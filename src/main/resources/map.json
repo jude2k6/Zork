@@ -1,41 +1,92 @@
 {
-  "Outside": {
-    "description": "outside the main entrance of the university",
+  "Changing-Rooms": {
+    "name": "Changing-Rooms",
+    "description": "Changing-Rooms:\nChanging rooms magically appear, rooms move.",
     "items": [],
     "npcs": [],
     "exits": {}
   },
-  "Theatre": {
-    "description": "in a lecture theatre",
+  "Menswear-Sanctuary": {
+    "name": "Menswear-Sanctuary",
+    "description": "Menswear-Sanctuary:\nCalm music. Wide open space.\nOne other man stands staring at a wall, muttering:\n“Someday… they’ll finish the self-checkout.”",
     "items": [],
     "exits": {}
   },
-  "Pub": {
-    "description": "in the campus pub",
+  "Lingerie-Labyrinth": {
+    "name": "Lingerie-Labyrinth",
+    "description": "Lingerie-Labyrinth:\nBras hang from every direction,\njudging you silently.\nYou are certain everyone thinks you’re here for a weird reason —\nincluding you.",
     "items": [],
+    "npcs": [],
     "exits": {}
   },
-  "Lab": {
-    "description": "in a computing lab",
+  "Womenswear": {
+    "name": "Womenswear",
+    "description": "Womenswear:\nClothes racks rearrange themselves at will blocking exits.\nStaff give contradictory directions.",
     "items": [],
+    "npcs": [],
     "exits": {}
   },
-  "Office": {
-    "description": "in the computing admin office",
+  "Candle-Grotto": {
+    "name": "Candle-Grotto",
+    "description": "Candle-Grotto:\nDim lighting. Hundreds of candles whisper scents into your soul.\n Anxiety-Breeze-candle softly whispers take me instead.",
     "items": [],
+    "npcs": [],
     "exits": {}
   },
-  "Treasure_room": {
-    "description": "dimly lit room",
-    "items": [
-      "coinbag",
-      "watch"
-    ],
+  "Homewear-valley": {
+    "name": "Homewear-valley",
+    "description": "Homewear-valley:\nThrows and cushions float like clouds.",
+    "items": [],
+    "npcs": [],
     "exits": {}
   },
-  "Start_room": {
-    "description": "Start",
+  "Shoe-Swamplands": {
+    "name": "Shoe-Swamplands",
+    "description": "Shoe-Swamplands:\nOdd smells. Discarded boxes everywhere.\n Too dark to see anything",
     "items": [],
+    "npcs": [],
+    "exits": {}
+  },
+  "€3-Sock-Bin": {
+    "name": "€3-Sock-Bin",
+    "description": "€3-Sock-Bin:\nA chaotic bargain bin vortex.",
+    "items": [],
+    "npcs": [],
+    "exits": {}
+  },
+  "Baby-Section-Maze": {
+    "name": "Baby-Section-Maze",
+    "description": "Baby-Section-Maze:\nStrollers block every path.\nTiny shoes everywhere.",
+    "items": [],
+    "npcs": [],
+    "exits": {}
+  },
+  "Cashiers": {
+    "name": "Cashiers",
+    "description": "Cashiers:\nMassive multi-line battlefield.",
+    "items": [],
+    "npcs": [],
+    "exits": {}
+  },
+  "Exits": {
+    "name": "Exits",
+    "description": "Exits:\nIf ANY item still has a security tag, alarms blare for 9 minutes.\nNPCs stare.\nStaff sigh.",
+    "items": [],
+    "npcs": [],
+    "exits": {}
+  },
+  "Storeroom": {
+    "name": "Storeroom",
+    "description": "Store-Room:\nStacks of forgotten stock line the walls.\nBoxes wobble, labels lie, and the air smells faintly of panic.",
+    "items": [],
+    "npcs": [],
+    "exits": {}
+  },
+  "Outside": {
+    "name": "Outside",
+    "description": "Outside:\nYou escape…",
+    "items": [],
+    "npcs": [],
     "exits": {}
   }
 }

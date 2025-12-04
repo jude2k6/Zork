@@ -1,26 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/17.0.12" fx:controller="org.zorkrip.ui.fx.GameController">
 
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      xmlns="http://javafx.com/javafx/17.0.12"
+      fx:controller="org.zorkrip.ui.fx.GameController"
+      spacing="10"
+      prefWidth="600" prefHeight="400"
+      fx:id="rootPane">
 
-    <TextArea fx:id="inventory" editable="false" style="-fx-font-family: 'Consolas'; -fx-font-size: 20;" wrapText="true"
-              AnchorPane.bottomAnchor="60" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="480"
-              AnchorPane.topAnchor="10"/>
-    <!-- console -->
-    <TextArea fx:id="console" editable="false" styleClass="crt" style="-fx-font-family: 'Consolas'; -fx-font-size: 14;" wrapText="true"
-              AnchorPane.bottomAnchor="60" AnchorPane.leftAnchor="100" AnchorPane.rightAnchor="10"
-              AnchorPane.topAnchor="10"/>
+    <!-- Top area: Inventory + Console (with Image above console) -->
+    <HBox spacing="10" VBox.vgrow="ALWAYS">
 
-    <!-- input -->
-    <HBox spacing="10" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
-        <Button fx:id="quitButton" minWidth="80" onAction="#quitGame" text="Quit"/>
-        <TextField fx:id="userInput" promptText="Enter command..." HBox.hgrow="ALWAYS"/>
+        <!-- Inventory -->
+        <TextArea fx:id="inventory"
+                  editable="false"
+                  wrapText="true"
+                  HBox.hgrow="ALWAYS" />
 
-        <Button fx:id="enterButton" minWidth="80" onAction="#enterCommand" text="Enter"/>`
+        <!-- Console area with image on top -->
+        <VBox spacing="5" HBox.hgrow="ALWAYS">
+
+            <!-- Image above console -->
+            <ImageView fx:id="consoleImage" fitWidth="200" fitHeight="150" preserveRatio="true" />
+
+            <!-- Console TextArea -->
+            <TextArea fx:id="console"
+                      editable="false"
+                      wrapText="true"
+                      VBox.vgrow="ALWAYS" />
+
+        </VBox>
+
     </HBox>
 
+    <!-- Bottom input bar -->
+    <HBox spacing="10">
+        <Button fx:id="quitButton" text="Quit" onAction="#quitGame"/>
+        <TextField fx:id="userInput" promptText="Enter command..." HBox.hgrow="ALWAYS"/>
+        <Button fx:id="enterButton" text="Enter" onAction="#enterCommand"/>
+    </HBox>
 
-</AnchorPane>
+</VBox>
