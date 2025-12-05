@@ -1,9 +1,7 @@
 package org.zorkrip.model;
 
 
-
-
-public class  Player extends Character {
+public class Player extends Character {
     private boolean enhancedSight;
     private boolean win;
 
@@ -23,7 +21,7 @@ public class  Player extends Character {
     }
 
 
-    public boolean getWin(){
+    public boolean getWin() {
         return win;
     }
 

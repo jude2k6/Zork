@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<AnchorPane fx:id="root"
-            xmlns:fx="http://javafx.com/fxml"
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:id="root"
             xmlns="http://javafx.com/javafx"
             fx:controller="org.zorkrip.ui.fx.CreditsController">
 
-    <VBox alignment="CENTER"  AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+    <VBox alignment="CENTER" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
           AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
 
         <Label text="Credits" styleClass="title"/>
 
-        <VBox fx:id="creditsBox" alignment="CENTER" >
+        <VBox fx:id="creditsBox" alignment="CENTER">
             <Label text="Game Design: Jude Delaney" styleClass="subtitle"/>
             <Label text="Programming: Jude Delaney" styleClass="subtitle"/>
             <Label text="Art &amp; Graphics: Chatters" styleClass="subtitle"/>
         </VBox>
 
-        <Button text="Back" fx:id="backButton" onAction="#back" />
+        <Button text="Back" fx:id="backButton" onAction="#back"/>
 
     </VBox>
 

@@ -11,14 +11,13 @@ public class Exit implements Serializable {
     private boolean isVisible;
 
 
-
-    public Exit(String direction, Room neighbour,boolean isVisible) {
+    public Exit(String direction, Room neighbour, boolean isVisible) {
         this.direction = direction;
         this.neighbour = neighbour;
         this.isVisible = isVisible;
     }
 
-    public Exit(String direction, Room neighbour,boolean isVisible, boolean locked, String key) {
+    public Exit(String direction, Room neighbour, boolean isVisible, boolean locked, String key) {
         this.direction = direction;
         this.neighbour = neighbour;
         this.isVisible = isVisible;
@@ -37,7 +36,10 @@ public class Exit implements Serializable {
     public boolean isVisible() {
         return isVisible;
     }
-    public void setVisible(boolean b){isVisible=true;}
+
+    public void setVisible() {
+        isVisible = true;
+    }
 
     public String getKey() {
         return key;

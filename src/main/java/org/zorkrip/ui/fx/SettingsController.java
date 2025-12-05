@@ -2,10 +2,8 @@ package org.zorkrip.ui.fx;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -15,7 +13,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public  class SettingsController {
+public class SettingsController {
+    public final double masterVolume = 100;
     @FXML
     public Slider masterVolumeSlider;
     public Slider sfxVolumeSlider;
@@ -27,10 +26,6 @@ public  class SettingsController {
     @FXML
     private AnchorPane root;
 
-    public double masterVolume = 100;
-
-
-
     public void initialize() {
 
         DoubleBinding fontScale = root.widthProperty()
@@ -39,31 +34,30 @@ public  class SettingsController {
         applyButton.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontScale.multiply(14), "px;"));
         backButton.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontScale.multiply(14), "px;"));
 
-
+        DoubleBinding widthScale = root.widthProperty().divide(4); // tweak divisor
+        applyButton.prefWidthProperty().bind(widthScale);
+        backButton.prefWidthProperty().bind(widthScale);
 
         masterVolumeSlider.setValue(masterVolume);
-        sfxVolumeSlider.setValue(BackgroundMusic.getMediaPlayer().getVolume()*100);
-        musicVolumeSlider.setValue(BackgroundMusic.getMediaPlayer().getVolume()*100);
+        sfxVolumeSlider.setValue(BackgroundMusic.getMediaPlayer().getVolume() * 100);
+        musicVolumeSlider.setValue(BackgroundMusic.getMediaPlayer().getVolume() * 100);
         theme.setSelected(true);
 
 
     }
 
 
+    public void apply() {
 
-    public void apply(ActionEvent actionEvent) {
-
-        BackgroundMusic.getMediaPlayer().setVolume((masterVolumeSlider.getValue()/100*musicVolumeSlider.getValue()/100));
+        BackgroundMusic.getMediaPlayer().setVolume((masterVolumeSlider.getValue() / 100 * musicVolumeSlider.getValue() / 100));
         stage = (Stage) backButton.getScene().getWindow();
         Scene scene = stage.getScene();
 
 
-
-        if (!theme.isSelected()){
+        if (!theme.isSelected()) {
             scene.getStylesheets().clear();
             scene.getStylesheets().add(getClass().getResource("/light.css").toExternalForm());
-        }
-        else {
+        } else {
             scene.getStylesheets().clear();
             scene.getStylesheets().add(getClass().getResource("/dark.css").toExternalForm());
         }

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-
 <VBox xmlns:fx="http://javafx.com/fxml/1"
       xmlns="http://javafx.com/javafx/17.0.12"
       fx:controller="org.zorkrip.ui.fx.GameController"
@@ -18,19 +17,25 @@
         <TextArea fx:id="inventory"
                   editable="false"
                   wrapText="true"
-                  HBox.hgrow="ALWAYS" />
+                  prefColumnCount="1"
+                  HBox.hgrow="ALWAYS"/>
 
         <!-- Console area with image on top -->
         <VBox spacing="5" HBox.hgrow="ALWAYS">
 
             <!-- Image above console -->
-            <ImageView fx:id="consoleImage" fitWidth="200" fitHeight="150" preserveRatio="true" />
+            <ImageView fx:id="consoleImage"
+                       fitWidth="200"
+                       fitHeight="150"
+                       preserveRatio="true"/>
 
             <!-- Console TextArea -->
             <TextArea fx:id="console"
                       editable="false"
                       wrapText="true"
-                      VBox.vgrow="ALWAYS" />
+                      prefColumnCount="1"
+                      VBox.vgrow="ALWAYS"
+                      style="-fx-wrap-text: true;"/>
 
         </VBox>
 
@@ -38,9 +43,17 @@
 
     <!-- Bottom input bar -->
     <HBox spacing="10">
-        <Button fx:id="quitButton" text="Quit" onAction="#quitGame"/>
-        <TextField fx:id="userInput" promptText="Enter command..." HBox.hgrow="ALWAYS"/>
-        <Button fx:id="enterButton" text="Enter" onAction="#enterCommand"/>
+        <Button fx:id="quitButton"
+                text="Quit"
+                onAction="#quitGame"/>
+
+        <TextField fx:id="userInput"
+                   promptText="Enter command..."
+                   HBox.hgrow="ALWAYS"/>
+
+        <Button fx:id="enterButton"
+                text="Enter"
+                onAction="#enterCommand"/>
     </HBox>
 
 </VBox>

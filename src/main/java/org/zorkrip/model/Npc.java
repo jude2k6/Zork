@@ -9,7 +9,6 @@ public class Npc extends Character {
     private final Quest quest;
     private final HashMap<DialogueCondition, String[]> dialogue;
     private DialogueCondition dialogueCondition;
-    private int dialogueIndex;
 
 
     public Npc(String name, Room startingRoom, Quest quest) {

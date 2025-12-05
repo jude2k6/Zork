@@ -1,6 +1,5 @@
 package org.zorkrip.model;
 
-import org.zorkrip.model.Player;
 import org.zorkrip.persistence.WorkerNpc;
 
 public class Mannequin extends PushableItem {

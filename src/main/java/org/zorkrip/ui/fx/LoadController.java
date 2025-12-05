@@ -22,10 +22,6 @@ public class LoadController {
     private AnchorPane root;
 
 
-
-
-
-
     public void initialize() {
         DoubleBinding fontScale = root.widthProperty()
                 .add(root.heightProperty())

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.*?>
-
-<AnchorPane fx:id="root"
-            xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:id="root"
             xmlns="http://javafx.com/javafx/17.0.12"
             fx:controller="org.zorkrip.ui.fx.StartController">
 
-    <VBox alignment="CENTER"   AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+    <VBox alignment="CENTER" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
           AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
 
-        <Button text="Start" fx:id="start" onAction="#play" />
-        <Button text="Credits" fx:id="credits" onAction="#credits" />
-        <Button text="Settings" fx:id="settings" onAction="#settings" />
-        <Button text="Quit" fx:id="quit" onAction="#quit" />
+        <Button text="Start" fx:id="start" onAction="#play"/>
+        <Button text="Credits" fx:id="credits" onAction="#credits"/>
+        <Button text="Settings" fx:id="settings" onAction="#settings"/>
+        <Button text="Quit" fx:id="quit" onAction="#quit"/>
 
     </VBox>
 

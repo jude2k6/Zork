@@ -2,7 +2,6 @@ package org.zorkrip.persistence;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import javafx.concurrent.Worker;
 import org.zorkrip.model.*;
 
 import java.io.*;
@@ -28,14 +27,16 @@ public class Mapbuilder {
             /// npcs
             //husband
             Npc husband = new Npc("Deshevilded-Husband", rooms.get("Menswear-Sanctuary"), new Quest("Sunglasses", new Item("Blue-medium-hoody", "A soft blue hoody labeled 'Medium-ish'.\n Smells faintly of deodorant samples and existential dread.", true, true)));
-            String husbandIntro = "The man looks up at you with exhausted eyes.\n"
-                    + "\"Mate… I can’t even look at the fluorescent lights right now.\"\n"
-                    + "\"If you find any thing to help in this cursed place,bring it me.\"\n"
-                    + "\"Then I’ll help you with whatever you're after.\"";
-            String husbandTrade = "He grabs the sunglasses like they’re holy relics.\n"
-                    + "\"Oh thank god… I can finally open my eyes again.\"\n"
-                    + "He puts them on, sighs deeply, then hands you the hoody.\n"
-                    + "\"Here. Take it. And may the retail gods guide you.\"";
+            String husbandIntro = """
+                    The man looks up at you with exhausted eyes.
+                    "Mate… I can’t even look at the fluorescent lights right now."
+                    "If you find any thing to help in this cursed place,bring it me."
+                    "Then I’ll help you with whatever you're after.\"""";
+            String husbandTrade = """
+                    He grabs the sunglasses like they’re holy relics.
+                    "Oh thank god… I can finally open my eyes again."
+                    He puts them on, sighs deeply, then hands you the hoody.
+                    "Here. Take it. And may the retail gods guide you.\"""";
 
             String[] husbandAfter = {
                     "He adjusts his sunglasses. \"I'm staying here until my wife finds me—or the store collapses. Whichever comes first.\"",
@@ -53,11 +54,21 @@ public class Mapbuilder {
             husband.addDialogue(DialogueCondition.QUESTFINISHED, husbandAfter);
 
             Npc cashier = new Cashier("Mary-Walsh", rooms.get("Cashiers"));
-            WorkerNpc worker = new WorkerNpc("Sales-assistant",rooms.get("Homewear-valley"));
+            WorkerNpc worker = new WorkerNpc("Sales-assistant", rooms.get("Homewear-valley"));
 
 
+            Chest<Item> devChest = new Chest<>();
 
 
+            devChest.add(new Item("€3-Socks",
+                    "Thick, aggressively ordinary black socks, tagged €3.",
+                    true, true));
+            devChest.add(new Item("Baby-bib", "A small baby bib with a worn-out giraffe design.\n"
+                    , true, true));
+            devChest.add(new Candle("Forest-Regret-candle", "A candle labeled 'Forest Regret'. It smells like pine, moss, and every bad decision you've made on a Sunday evening.\n", true));
+            devChest.add(new Item("Blue-medium-hoody", "A soft blue hoody labeled 'Medium-ish'.\n Smells faintly of deodorant samples and existential dread.", true, true));
+            devChest.add(new Item("Fluffy-slippers", "\"Soft pair of slippers with slightly worn soles.\"\n", true, true));
+            rooms.get("Changing-Rooms").setDevChest(devChest);
 
 
             // Changingrooms
@@ -80,8 +91,8 @@ public class Mapbuilder {
 
 
             //Storeroom
-            rooms.get("Storeroom").setExit("south", new Exit("south", rooms.get("Lingerie-Labyrinth"), false));
-            rooms.get("Storeroom").addItem(new Item("Fluffy-slippers","\"Soft pair of slippers with slightly worn soles.\"\n",true,true));
+            rooms.get("Storeroom").setExit("south", new Exit("south", rooms.get("Lingerie-Labyrinth"), true));
+            rooms.get("Storeroom").addItem(new Item("Fluffy-slippers", "\"Soft pair of slippers with slightly worn soles.\"\n", true, true));
 
 
             // Womanswear
@@ -89,22 +100,19 @@ public class Mapbuilder {
             rooms.get("Womenswear").setExit("east", new Exit("east", rooms.get("Baby-Section-Maze"), true));
             rooms.get("Womenswear").setExit("south", new Exit("south", rooms.get("Candle-Grotto"), true));
             rooms.get("Womenswear").setExit("west", new Exit("west", rooms.get("Menswear-Sanctuary"), true));
+            rooms.get("Womenswear").addItem(new Hanger("Hanger", "Bent hanger that looks like it could be used to grab somethingz\n"));
 
             // candle grotto
             rooms.get("Candle-Grotto").setExit("north", new Exit("north", rooms.get("Womenswear"), true));
             rooms.get("Candle-Grotto").setExit("south", new Exit("south", rooms.get("Homewear-valley"), true));
-            rooms.get("Candle-Grotto").addItem(new Candle("Forest-Regret-candle", "A candle labeled 'Forest Regret'. It smells like pine, moss, and every bad decision you've made on a Sunday evening.", true));
+            rooms.get("Candle-Grotto").addItem(new Candle("Forest-Regret-candle", "A candle labeled 'Forest Regret'. It smells like pine, moss, and every bad decision you've made on a Sunday evening.\n", true));
             rooms.get("Candle-Grotto").addItem(new Candle(
-                    "Laundry-Day-Delusion-candle",
-                    "A candle that smells like freshly folded laundry and the lie you tell yourself about 'keeping on top of things'.",
+                    "Laundry-Day-candle",
+                    "A candle that smells like freshly folded laundry and the lie you tell yourself about 'keeping on top of things'.\n",
                     true));
             rooms.get("Candle-Grotto").addItem(new Candle(
                     "Midnight-Tesco-Run-candle",
-                    "A candle with the unsettling scent of fluorescent aisles, reduced stickers, and questionable life choices.",
-                    true));
-            rooms.get("Candle-Grotto").addItem(new Candle(
-                    "Retail-Trauma-candle",
-                    "Not scented. Just smells like working a closing shift and wondering where your life went wrong.",
+                    "A candle with the unsettling scent of fluorescent aisles, reduced stickers, and questionable life choices.\n",
                     true));
 
 
@@ -112,14 +120,13 @@ public class Mapbuilder {
             rooms.get("Homewear-valley").setExit("north", new Exit("north", rooms.get("Candle-Grotto"), true));
             rooms.get("Homewear-valley").setExit("east", new Exit("east", rooms.get("Cashiers"), true));
             rooms.get("Homewear-valley").setExit("south", new Exit("south", rooms.get("Shoe-Swamplands"), true));
-            rooms.get("Homewear-valley").addItem(new Mannequin("Mannequin",""
-            ));
+            rooms.get("Homewear-valley").addItem(new Mannequin("Mannequin", ""));
             rooms.get("Homewear-valley").addNpc(worker);
 
             //shoe
             rooms.get("Shoe-Swamplands").setExit("north", new Exit("north", rooms.get("Homewear-valley"), true));
             rooms.get("Shoe-Swamplands").setExit("south", new Exit("south", rooms.get("Exits"), true));
-            rooms.get("Shoe-Swamplands").addItem(new Item("Sunglasses", "A cheap pair of plastic sunglasses. Slightly crooked, but good enough to survive Pennys lighting.", false, true));
+            rooms.get("Shoe-Swamplands").addItem(new Item("Sunglasses", "A cheap pair of plastic sunglasses. Slightly crooked, but good enough to survive Pennys lighting.\n", false, true));
 
             //exits
             rooms.get("Exits").setExit("north", new Exit("north", rooms.get("Shoe-Swamplands"), true));
@@ -134,8 +141,8 @@ public class Mapbuilder {
             rooms.get("Baby-Section-Maze").setExit("north", new Exit("north", rooms.get("€3-Sock-Bin"), true));
             rooms.get("Baby-Section-Maze").setExit("south", new Exit("south", rooms.get("Cashiers"), true));
             rooms.get("Baby-Section-Maze").setExit("west", new Exit("west", rooms.get("Womenswear"), true));
-            rooms.get("Baby-Section-Maze").addItem(new PushableItem("Pram","",new Item("Baby-bib","A small baby bib with a worn-out giraffe design."
-            ,true,true)));
+            rooms.get("Baby-Section-Maze").addItem(new PushableItem("Pram", "", new Item("Baby-bib", "A small baby bib with a worn-out giraffe design.\n"
+                    , true, true)));
 
             //till
             rooms.get("Cashiers").setExit("north", new Exit("north", rooms.get("Baby-Section-Maze"), true));

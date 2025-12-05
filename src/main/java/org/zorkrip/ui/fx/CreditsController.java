@@ -4,7 +4,6 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -24,8 +23,7 @@ public class CreditsController {
     private AnchorPane root;
 
 
-
-    public void initialize(){
+    public void initialize() {
 
 
         DoubleBinding fontScale = root.widthProperty()
@@ -36,6 +34,7 @@ public class CreditsController {
         creditsBox.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontScale.multiply(14), "px;"));
 
     }
+
     public void back() throws IOException {
 
 

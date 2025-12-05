@@ -3,14 +3,11 @@ package org.zorkrip.ui.fx;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,7 +19,6 @@ public class StartController {
     public Button credits;
     public Button settings;
     Stage stage;
-    private MediaView mediaView;
     @FXML
     private AnchorPane root;
 

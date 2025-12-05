@@ -4,7 +4,7 @@ public class Candle extends Item {
 
 
     public Candle(String name, String description, boolean isVisable) {
-        super(name, description, isVisable,true);
+        super(name, description, isVisable, true);
     }
 
 

@@ -8,14 +8,15 @@ import java.util.Map;
 
 
 public class Room implements Serializable, Inventory {
-    private String name;
     private final String description;
     private final Map<String, Exit> exits; // Map direction to neighboring Room
+    private String name;
     private ArrayList<Item> inventory;
     private ArrayList<Npc> npcs;
+    private Chest<Item> devChest;
 
 
-    public Room(String description,String name) {
+    public Room(String description, String name) {
 
 
         exits = new LinkedHashMap<>();
@@ -25,14 +26,9 @@ public class Room implements Serializable, Inventory {
 
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public void setExit(String direction, Exit neighbor) {
         exits.put(direction, neighbor);
     }
-
 
     public Exit getExit(String direction) {
         return exits.get(direction);
@@ -44,7 +40,6 @@ public class Room implements Serializable, Inventory {
         }
         npcs.add(npc);
     }
-
 
     public Npc getNpc(String npcName) {
         for (Npc npc : npcs) {
@@ -78,17 +73,15 @@ public class Room implements Serializable, Inventory {
         return sb.toString().trim();
     }
 
-
     public String getRoomDescription(Player player) {
         return getLongDescription() +
                 "\n" +
-                "Items: " + printItems(player) + "\n" +"Npcs: " + player.getCurrentRoom().getNpcs() +"\n\n";
+                "Items: " + printItems(player) + "\n" + "Npcs: " + player.getCurrentRoom().getNpcs() + "\n\n";
     }
 
     public String getLongDescription() {
-        return    description + ".\nExits: " + getExitString();
+        return description + ".\nExits: " + getExitString();
     }
-
 
     @Override
     public List<Item> getInventory() {
@@ -96,9 +89,17 @@ public class Room implements Serializable, Inventory {
         return inventory;
     }
 
-
     public String getName() {
         return name;
     }
+
+    public Chest<Item> getDevChest() {
+        return devChest;
+    }
+
+    public void setDevChest(Chest<Item> devChest) {
+        this.devChest = devChest;
+    }
+
 }
 

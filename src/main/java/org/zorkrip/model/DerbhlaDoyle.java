@@ -4,7 +4,6 @@ import java.util.Random;
 
 public class DerbhlaDoyle extends Npc {
 
-    private int talkCount = 0;
     private final String[] defaultDialogue = new String[]{
             "The exit’s open. Use it. Preferably at speed.\n",
             "Still here? What are you, lost in the lace again?\n",
@@ -16,6 +15,7 @@ public class DerbhlaDoyle extends Npc {
             "Honestly, you’re doing well. Most men faint by now.\n",
             "If you get stuck again, please do not come back here. Ever.\n"
     };
+    private int talkCount = 0;
 
 
     public DerbhlaDoyle(Room startingRoom) {
@@ -31,9 +31,10 @@ public class DerbhlaDoyle extends Npc {
             case 2:
                 return "Seriously? Again? Just… look around, maybe try not to break anything.\n";
             case 3:
-                getCurrentRoom().getExit("west").setVisible(true);
-                getCurrentRoom().getExit("east").setVisible(true);
-                getCurrentRoom().getExit("south").setVisible(true);
+                getCurrentRoom().getExit("north").setVisible();
+                getCurrentRoom().getExit("west").setVisible();
+                getCurrentRoom().getExit("east").setVisible();
+                getCurrentRoom().getExit("south").setVisible();
                 return "Fine. Since you clearly can’t manage, the exits are " + getCurrentRoom().getExitString() + " Don’t blame me for the mannequins.\n";
             default:
 

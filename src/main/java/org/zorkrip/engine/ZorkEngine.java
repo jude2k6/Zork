@@ -72,7 +72,7 @@ public class ZorkEngine implements GameEngine {
         saveGame(rooms, player, path);
     }
 
-    public String play(String s) {
+    private String play(String s) {
 
 
         Command command = parser.getCommand(s);
@@ -81,7 +81,7 @@ public class ZorkEngine implements GameEngine {
 
     }
 
-    public String printWelcome() {
+    private String printWelcome() {
 
         return "You wake up in a cramped Penneys changing room,\n" + "head throbbing, pockets empty,\n" + "and a crumpled shopping list from your wife stuck to your shoe.\n\n" + "You have no money, no plan,\n" + "and absolutely no idea how you got here.\n\n" + "Type 'help' if you need help.\n" + "Exits: " + player.getCurrentRoom().getExitString() + "\n";
 
@@ -102,6 +102,7 @@ public class ZorkEngine implements GameEngine {
             case "inspect" -> inspect(command);
             case "talk" -> talk(command);
             case "push" -> push(command);
+            case "devopen" -> devOpen();
             default -> "I don't know what you mean...\n";
         };
     }
@@ -181,12 +182,13 @@ public class ZorkEngine implements GameEngine {
         } else {
             Room nextRoom = exit.getNeighbour();
             if (player.getCurrentRoom().getExit(direction).isLocked()) {
-                if (nextRoom.getName() == "Exits") {
+                if (nextRoom.getName().equals("Exits")) {
                     if (!player.getWin()) {
                         return "You dont have all the items required to win.";
                     }
                 }
                 player.setCurrentRoom(nextRoom);
+
 
                 return player.getCurrentRoom().getRoomDescription(player);
             } else {
@@ -195,6 +197,7 @@ public class ZorkEngine implements GameEngine {
 
 
         }
+
 
     }
 
@@ -250,7 +253,6 @@ public class ZorkEngine implements GameEngine {
     }
 
 
-
     private String open(Command command) {
         if (!command.hasSecondWord()) {
             return "Drop what?\n";
@@ -271,4 +273,25 @@ public class ZorkEngine implements GameEngine {
         }
         return "";
     }
+
+    private String devOpen() {
+        Chest<Item> chest = player.getCurrentRoom().getDevChest();
+
+        if (chest == null) {
+            return "Nothing happens.\n";
+        }
+
+        for (Item item : chest.getContents()) {
+            player.addItem(item);
+        }
+
+        player.setWin(true);
+
+        return """
+                [DEV] Chest opened.
+                [DEV] All win-condition items added.
+                [DEV] Win flag set.
+                """;
+    }
+
 }

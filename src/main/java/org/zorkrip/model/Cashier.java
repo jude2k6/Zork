@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 
-public class Cashier extends Npc{
+public class Cashier extends Npc {
 
 
     public Cashier(String name, Room startingRoom) {
@@ -13,13 +13,13 @@ public class Cashier extends Npc{
 
 
     @Override
-    public String talk(Player player){
+    public String talk(Player player) {
 
         boolean hasAll = new HashSet<>(Collections.singletonList(player.getInventory()))
-                .containsAll(Arrays.asList(((Note)player.getItem("note")).getrequiredItems()));
+                .containsAll(Arrays.asList(((Note) player.getItem("note")).getrequiredItems()));
 
 
-        if (hasAll){
+        if (hasAll) {
             player.setWin(true);
 
             return "Thanks for shopping im sure your wife will love all this.\n";

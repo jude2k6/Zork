@@ -7,6 +7,7 @@ public interface GameEngine {
     String handleInput(String input);
 
     String viewInventory();
+
     String viewRoom();
 
     void saveGameInterface(String path);

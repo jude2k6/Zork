@@ -17,14 +17,11 @@ public class CommandWords {
         validCommands.put("drop", "Drop something");
         validCommands.put("open", "Opens door");
         validCommands.put("use", "Uses item");
-        validCommands.put("inspect","inspects item");
-        validCommands.put("push","pushes object");
+        validCommands.put("inspect", "inspects item");
+        validCommands.put("push", "pushes object");
 
     }
 
-    public boolean isCommand(String commandWord) {
-        return validCommands.containsKey(commandWord);
-    }
 
     public String showAll() {
         StringBuilder sb = new StringBuilder();
@@ -36,9 +33,9 @@ public class CommandWords {
         return sb.toString();
     }
 
-    public String getCommandDescription(String command){
-        if (validCommands.containsKey(command)){
-            return validCommands.get(command) +"\n";
+    public String getCommandDescription(String command) {
+        if (validCommands.containsKey(command)) {
+            return validCommands.get(command) + "\n";
         }
         return null;
     }

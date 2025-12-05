@@ -15,7 +15,7 @@ public class Parser {
         String word1 = null;
         String word2 = null;
 
-        s=s.toLowerCase();
+        s = s.toLowerCase();
         String[] commandArray = s.split(" ", -1);
 
         if (!commandArray[0].isEmpty()) {
